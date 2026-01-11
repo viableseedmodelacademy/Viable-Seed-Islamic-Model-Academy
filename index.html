@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #1e40af;
-            --secondary: #f59e0b;
+            --primary: #FF0000;
+            --secondary: #2B7FFF;
             --accent: #10b981;
             --dark: #1f2937;
             --light: #f3f4f6;
@@ -26,8 +26,7 @@
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
         }
-        
-        /* Page Transitions */
+
         .page {
             display: none;
             animation: fadeIn 0.5s ease-in-out;
@@ -83,9 +82,8 @@
             animation: scaleIn 0.6s ease-out forwards;
         }
         
-        /* Button Animations */
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), #3b82f6);
+            background: linear-gradient(135deg, var(--primary), #FF0000);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -108,20 +106,27 @@
         
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.4);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
         }
-        
         .btn-secondary {
-            background: linear-gradient(135deg, var(--secondary), #fbbf24);
+            background: linear-gradient(135deg, var(--secondary), #2B7FFA);
             transition: all 0.3s ease;
         }
         
         .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 30px #2B7FFA;
+        }
+        .btn-secondaryt {
+            background: linear-gradient(135deg, #fa2b70, #fa2b70);
+            transition: all 0.3s ease;
         }
         
-        /* Card Hover Effects */
+        .btn-secondaryt:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px #fa2b70;
+        }
+        
         .card-hover {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -130,8 +135,7 @@
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
-        
-        /* Image Hover */
+
         .img-hover {
             transition: all 0.5s ease;
             overflow: hidden;
@@ -145,7 +149,6 @@
             transform: scale(1.1);
         }
         
-        /* Carousel Styles */
         .carousel-container {
             position: relative;
             overflow: hidden;
@@ -160,7 +163,6 @@
             display: block;
         }
         
-        /* Scroll Animation */
         .scroll-animate {
             opacity: 0;
             transform: translateY(30px);
@@ -172,7 +174,6 @@
             transform: translateY(0);
         }
         
-        /* Navigation Active State */
         .nav-link {
             position: relative;
         }
@@ -194,12 +195,10 @@
             width: 100%;
         }
         
-        /* Testimonial Cards */
         .testimonial-card {
             background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
         }
         
-        /* Course Card Overlay */
         .course-card .overlay {
             opacity: 0;
             transition: all 0.4s ease;
@@ -209,7 +208,6 @@
             opacity: 1;
         }
         
-        /* Facility Grid */
         .facility-item {
             transition: all 0.4s ease;
         }
@@ -229,7 +227,6 @@
             transition: all 0.4s ease;
         }
         
-        /* Mobile Menu */
         .mobile-menu {
             transform: translateX(-100%);
             transition: transform 0.3s ease;
@@ -239,13 +236,11 @@
             transform: translateX(0);
         }
         
-        /* Hero Background Pattern */
         .hero-pattern {
-            background-color: #1e40af;
+            background-color: #FF0000;
             background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         
-        /* Decorative Elements */
         .blob {
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             animation: blob 8s ease-in-out infinite;
@@ -256,24 +251,20 @@
             50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
         }
         
-        /* Form Input Focus */
         .form-input:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
         }
         
-        /* Counter Animation */
         .counter {
             font-variant-numeric: tabular-nums;
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-    <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
                 <a href="#" onclick="showPage('home')" class="flex items-center space-x-3">
                     <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-=red-500 rounded-xl flex items-center justify-center">
                         <img src="logo.png" alt="Our logo">
@@ -283,7 +274,6 @@
                     </div>
                 </a>
                 
-                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#" onclick="showPage('home')" class="nav-link text-gray-700 hover:text-red-600 font-semibold active" data-page="home">Home</a>
                     <a href="#" onclick="showPage('about')" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="about">About Us</a>
@@ -295,14 +285,12 @@
                     </button>
                 </div>
                 
-                <!-- Mobile Menu Button -->
                 <button class="md:hidden text-gray-700 text-2xl" onclick="toggleMobileMenu()">
                     <i class="fas fa-bars" id="menuIcon"></i>
                 </button>
             </div>
         </div>
         
-        <!-- Mobile Menu -->
         <div class="mobile-menu fixed top-0 left-0 w-64 h-full bg-white shadow-2xl md:hidden" id="mobileMenu">
             <div class="p-6">
                 <button class="absolute top-4 right-4 text-gray-500 text-xl" onclick="toggleMobileMenu()">
@@ -322,24 +310,20 @@
         </div>
     </nav>
 
-    <!-- PAGE 1: HOME -->
     <section class="page active" id="page-home">
-        <!-- Hero Section -->
         <div class="hero-pattern min-h-screen pt-20 relative overflow-hidden">
-            <!-- Decorative Blobs -->
             <div class="blob absolute top-20 right-10 w-72 h-72 bg-red-400 opacity-20"></div>
             <div class="blob absolute bottom-20 left-10 w-96 h-96 bg-red-400 opacity-20" style="animation-delay: -4s;"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-                    <!-- Hero Content -->
                     <div class="text-white space-y-8 animate-slide-left">
-                        <div class="inline-block bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold animate-pulse">
+                        <div class="inline-block bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold animate-pulse">
                             🎓 Admission is Open!
                         </div>
                         <h1 class="text-4xl md:text-6xl font-bold leading-tight">
                             Welcome to<br>
-                            <span class="text-red-400">Viable Seed Islamic Model Academy</span>
+                            <span class="text-blue-400">Viable Seed Islamic Model Academy</span>
                         </h1>
                         <p class="text-xl text-red-100 leading-relaxed">
                             We provide quality education with Islamic values in a safe, caring, and modern learning environment.
@@ -348,38 +332,34 @@
                             <button onclick="showPage('contact')" class="btn-secondary text-red-900 px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2">
                                 <i class="fas fa-user-plus"></i> Enroll Now
                             </button>
-                            <button onclick="showPage('contact')" class="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2 hover:bg-white/30 transition-all">
+                            <button onclick="showPage('contact')" class="btn-secondaryt text-red-900 px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2">
                                 <i class="fas fa-phone"></i> Contact Us
                             </button>
                         </div>
                         
-                        <!-- Stats -->
                         <div class="grid grid-cols-3 gap-6 pt-8">
                             <div class="text-center">
-                                <div class="text-4xl font-bold text-red-400 counter" data-target="50">0</div>
+                                <div class="text-4xl font-bold text-blue-400 counter" data-target="50">0</div>
                                 <div class="text-red-200 text-sm">Happy Students</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-4xl font-bold text-red-400 counter" data-target="20">0</div>
+                                <div class="text-4xl font-bold text-blue-400 counter" data-target="20">0</div>
                                 <div class="text-red-200 text-sm">Expert Teachers</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-4xl font-bold text-red-400 counter" data-target="15">0</div>
+                                <div class="text-4xl font-bold text-blue-400 counter" data-target="15">0</div>
                                 <div class="text-red-200 text-sm">Years Experience</div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Hero Image -->
                     <div class="relative animate-slide-right">
                         <div class="relative z-10">
-                            <!-- Replace this image with real school hero image -->
                             <img src="classroom.png" alt="Students Learning" class="rounded-3xl shadow-2xl w-full">
                         </div>
                         <div class="absolute -bottom-6 -left-6 w-48 h-48 bg-red-400 rounded-3xl -z-0"></div>
                         <div class="absolute -top-6 -right-6 w-32 h-32 bg-red-400 rounded-2xl -z-0 animate-float"></div>
                         
-                        <!-- Floating Badge -->
                         <div class="absolute bottom-8 left-8 bg-white rounded-2xl p-4 shadow-xl animate-float">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
@@ -396,7 +376,6 @@
             </div>
         </div>
         
-        <!-- Image Carousel Section -->
         <div class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12 scroll-animate">
@@ -405,7 +384,6 @@
                 </div>
                 
                 <div class="carousel-container rounded-3xl overflow-hidden shadow-2xl scroll-animate">
-                    <!-- Slide 1 -->
                     <div class="carousel-slide active">
                         <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=500&fit=crop" alt="Classroom Learning" class="w-full h-[400px] md:h-[500px] object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
@@ -415,7 +393,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Slide 2 -->
                     <div class="carousel-slide">
                         <img src="sports.png" alt="Sports Activities" class="w-full h-[400px] md:h-[500px] object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
@@ -425,7 +402,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Slide 3 -->
                     <div class="carousel-slide">
                         <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&h=500&fit=crop" alt="Library" class="w-full h-[400px] md:h-[500px] object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
@@ -436,7 +412,6 @@
                         </div>
                     </div>
                     
-                    <!-- Carousel Controls -->
                     <div class="absolute bottom-8 right-8 flex gap-3">
                         <button onclick="prevSlide()" class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg">
                             <i class="fas fa-chevron-left text-gray-800"></i>
@@ -446,7 +421,6 @@
                         </button>
                     </div>
                     
-                    <!-- Carousel Indicators -->
                     <div class="absolute bottom-8 left-8 flex gap-2">
                         <button class="carousel-indicator w-3 h-3 rounded-full bg-white transition-all active" data-slide="0"></button>
                         <button class="carousel-indicator w-3 h-3 rounded-full bg-white/50 transition-all" data-slide="1"></button>
@@ -456,13 +430,11 @@
             </div>
         </div>
         
-        <!-- Welcome Section -->
         <div class="py-20 bg-gradient-to-br from-red-50 to-red-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div class="scroll-animate">
                         <div class="img-hover rounded-3xl overflow-hidden shadow-2xl">
-                            <!-- Replace this image with real school image -->
                             <img src="classroom.png" alt="School Building" class="w-full">
                         </div>
                     </div>
@@ -485,7 +457,6 @@
             </div>
         </div>
         
-        <!-- Key Highlights Section -->
         <div class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16 scroll-animate">
@@ -499,7 +470,6 @@
                 </div>
                 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Card 1 -->
                     <div class="card-hover bg-gradient-to-br from-red-500 to-red-700 rounded-3xl p-8 text-white text-center scroll-animate">
                         <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <i class="fas fa-book-open text-4xl"></i>
@@ -508,7 +478,6 @@
                         <p class="text-red-100">Internationally recognized curriculum with modern teaching methodologies</p>
                     </div>
                     
-                    <!-- Card 2 -->
                     <div class="card-hover bg-gradient-to-br from-red-500 to-red-600 rounded-3xl p-8 text-white text-center scroll-animate">
                         <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <i class="fas fa-mosque text-4xl"></i>
@@ -517,7 +486,6 @@
                         <p class="text-red-100">Strong foundation in Islamic values and ethical character building</p>
                     </div>
                     
-                    <!-- Card 3 -->
                     <div class="card-hover bg-gradient-to-br from-green-500 to-green-600 rounded-3xl p-8 text-white text-center scroll-animate">
                         <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <i class="fas fa-laptop-code text-4xl"></i>
@@ -526,7 +494,6 @@
                         <p class="text-green-100">Preparing students with coding, robotics, and technology skills</p>
                     </div>
                     
-                    <!-- Card 4 -->
                     <div class="card-hover bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl p-8 text-white text-center scroll-animate">
                         <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <i class="fas fa-heart text-4xl"></i>
@@ -538,7 +505,6 @@
             </div>
         </div>
         
-        <!-- Digital World Section -->
         <div class="py-20 bg-gray-900 relative overflow-hidden">
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute top-0 left-0 w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 40L40 0H20L0 20M40 40V20L20 40\'/%3E%3C/g%3E%3C/svg%3E');"></div>
@@ -584,14 +550,13 @@
                     </div>
                     
                     <div class="scroll-animate">
-                        <!-- Replace this image with real digital learning image -->
+
                         <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=500&fit=crop" alt="Digital Learning" class="rounded-3xl shadow-2xl">
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Testimonials Section -->
         <div class="py-20 bg-gradient-to-br from-red-50 to-red-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16 scroll-animate">
@@ -603,7 +568,6 @@
                 </div>
                 
                 <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Testimonial 1 -->
                     <div class="testimonial-card card-hover rounded-3xl p-8 shadow-lg scroll-animate">
                         <div class="flex items-center gap-1 text-red-400 mb-4">
                             <i class="fas fa-star"></i>
@@ -616,7 +580,6 @@
                             "Viable Seed Model Acaademy has been a blessing for our family. The perfect balance of academic excellence and Islamic values is exactly what we wanted for our children."
                         </p>
                         <div class="flex items-center gap-4">
-                            <!-- Replace with real parent image -->
                             <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">
                             <div>
                                 <div class="font-bold text-gray-800">Ayomide S.</div>
@@ -625,7 +588,6 @@
                         </div>
                     </div>
                     
-                    <!-- Testimonial 2 -->
                     <div class="testimonial-card card-hover rounded-3xl p-8 shadow-lg scroll-animate">
                         <div class="flex items-center gap-1 text-red-400 mb-4">
                             <i class="fas fa-star"></i>
@@ -638,7 +600,6 @@
                             "The teachers are incredibly caring and dedicated. My child has improved not just academically but also in confidence and moral character."
                         </p>
                         <div class="flex items-center gap-4">
-                            <!-- Replace with real parent image -->
                             <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">
                             <div>
                                 <div class="font-bold text-gray-800">Zulaykho A.</div>
@@ -648,7 +609,6 @@
                         </div>
                         
                     
-                    <!-- Testimonial 3 -->
                     <div class="testimonial-card card-hover rounded-3xl p-8 shadow-lg scroll-animate">
                         <div class="flex items-center gap-1 text-red-400 mb-4">
                             <i class="fas fa-star"></i>
@@ -661,7 +621,6 @@
                             "The digital skills program is outstanding! My child is learning coding and robotics at such a young age. Highly recommend this school."
                         </p>
                         <div class="flex items-center gap-4">
-                            <!-- Replace with real parent image -->
                             <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">
                             <div>
                                 <div class="font-bold text-gray-800">Mrs. Alaka 0.</div>
@@ -674,10 +633,8 @@
         </div>
     </section>
 
-    <!-- PAGE 2: ABOUT US -->
     <section class="page" id="page-about">
         <div class="pt-24">
-            <!-- About Hero -->
             <div class="hero-pattern py-20 relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h1 class="text-5xl font-bold text-white mb-6">About Us</h1>
@@ -687,7 +644,6 @@
                 </div>
             </div>
             
-            <!-- Vision & Mission -->
             <div class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid lg:grid-cols-2 gap-16">
@@ -718,7 +674,6 @@
                 </div>
             </div>
             
-            <!-- Commitments -->
             <div class="py-20 bg-gradient-to-br from-gray-50 to-red-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16 scroll-animate">
@@ -760,12 +715,10 @@
                 </div>
             </div>
             
-            <!-- Taking Good Care Section -->
             <div class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid lg:grid-cols-2 gap-16 items-center">
                         <div class="scroll-animate">
-                            <!-- Replace with real care image -->
                             <img src="carrying laptop.png" alt="Caring for Children" class="rounded-3xl shadow-2xl">
                         </div>
                         <div class="scroll-animate">
@@ -807,8 +760,7 @@
                 </div>
             </div>
             
-            <!-- Teachers Section -->
-            <div class="py-20 bg-gradient-to-br from-red-600 to-red-800">
+            <div class="py-20 bg-gradient-to-br from-pink-600 to-red-800">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16 scroll-animate">
                         <h2 class="text-4xl font-bold text-white mb-4">Our Dedicated Teachers</h2>
@@ -818,16 +770,13 @@
                     </div>
                     
                     <div class="grid md:grid-cols-4 gap-8">
-                        <!-- Teacher 1 -->
                         <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate">
-                            <!-- Replace with real teacher image -->
                             <img src="staff image.png" alt="Teacher" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
                             <h3 class="text-xl font-bold text-gray-800">Mr. Adedeji</h3>
                             <p class="text-red-600">Founder</p>
                             <p class="text-gray-500 text-sm mt-2">20+ years experience in educational leadership</p>
                         </div>
                         
-                        <!-- Teacher 2 -->
                         <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate">
                             <img src="staff image.png" alt="Teacher" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
                             <h3 class="text-xl font-bold text-gray-800">Mrs. Adedeji II</h3>
@@ -835,7 +784,6 @@
                             <p class="text-gray-500 text-sm mt-2">Specialization in curriculum development</p>
                         </div>
                         
-                        <!-- Teacher 3 -->
                         <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate">
                             <img src="staff image.png" alt="Teacher" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
                             <h3 class="text-xl font-bold text-gray-800">Ustadh Muadh</h3>
@@ -843,7 +791,6 @@
                             <p class="text-gray-500 text-sm mt-2">Hafiz with advanced Islamic studies certification</p>
                         </div>
                         
-                        <!-- Teacher 4 -->
                         <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate">
                             <img src="staff image.png" alt="Teacher" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
                             <h3 class="text-xl font-bold text-gray-800">Mallam Bako</h3>
@@ -856,10 +803,8 @@
         </div>
     </section>
 
-    <!-- PAGE 3: COURSES -->
     <section class="page" id="page-courses">
         <div class="pt-24">
-            <!-- Courses Hero -->
             <div class="hero-pattern py-20 relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h1 class="text-5xl font-bold text-white mb-6">Our Courses</h1>
@@ -869,14 +814,12 @@
                 </div>
             </div>
             
-            <!-- Courses Grid -->
             <div class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <!-- Course 1: Abacus -->
+
                         <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
                             <div class="relative h-48 overflow-hidden">
-                                <!-- Replace with real abacus image -->
                                 <img src="soroban.png" alt="Abacus" class="w-full h-full object-cover">
                                 <div class="overlay absolute inset-0 bg-gradient-to-t from-red-900/90 to-transparent flex items-end p-4">
                                     <span class="text-white text-sm font-semibold">View Details</span>
@@ -893,7 +836,6 @@
                             </div>
                         </div>
                         
-                        <!-- Course 2: Robotics -->
                         <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop" alt="Robotics" class="w-full h-full object-cover">
@@ -912,7 +854,6 @@
                             </div>
                         </div>
                         
-                        <!-- Course 3: Coding -->
                         <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop" alt="Coding" class="w-full h-full object-cover">
@@ -931,7 +872,6 @@
                             </div>
                         </div>
                         
-                        <!-- Course 4: Islamic Studies -->
                         <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="mosque.png" alt="Islamic Studies" class="w-full h-full object-cover">
@@ -950,7 +890,6 @@
                             </div>
                         </div>
                         
-                        <!-- Course 5: Qur'an Memorization -->
                         <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="reading quran.png" alt="Quran" class="w-full h-full object-cover">
@@ -969,7 +908,6 @@
                             </div>
                         </div>
                         
-                        <!-- Course 6: Digital Literacy -->
                         <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=200&fit=crop" alt="Digital Literacy" class="w-full h-full object-cover">
@@ -988,7 +926,6 @@
                             </div>
                         </div>
                         
-                        <!-- Course 7: Martial Arts -->
                         <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&h=200&fit=crop" alt="Taekwondo" class="w-full h-full object-cover">
@@ -1007,7 +944,6 @@
                             </div>
                         </div>
                         
-                        <!-- Course 8: Western Education -->
                         <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=200&fit=crop" alt="Western Education" class="w-full h-full object-cover">
@@ -1029,14 +965,13 @@
                 </div>
             </div>
             
-            <!-- CTA Section -->
-            <div class="py-20 bg-gradient-to-br from-red-600 to-red-800">
+            <div class="py-20 bg-gradient-to-br from-pink-600 to-red-600">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-animate">
                     <h2 class="text-4xl font-bold text-white mb-6">Ready to Enroll Your Child?</h2>
                     <p class="text-xl text-red-100 mb-8">
                         Give your child the gift of quality education combined with moral excellence
                     </p>
-                    <button onclick="showPage('contact')" class="btn-secondary text-red-900 px-10 py-4 rounded-full font-bold text-lg">
+                    <button onclick="showPage('contact')" class="btn-secondary text-blue-900 px-10 py-4 rounded-full font-bold text-lg">
                         Contact Us Today
                     </button>
                 </div>
@@ -1044,10 +979,8 @@
         </div>
     </section>
 
-    <!-- PAGE 4: FACILITIES -->
     <section class="page" id="page-facilities">
         <div class="pt-24">
-            <!-- Facilities Hero -->
             <div class="hero-pattern py-20 relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h1 class="text-5xl font-bold text-white mb-6">Our Facilities</h1>
@@ -1057,11 +990,9 @@
                 </div>
             </div>
             
-            <!-- Facilities Grid -->
             <div class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <!-- Facility 1: Classrooms -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="classroom.png" alt="Modern Classrooms" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-red-900/95 via-red-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1073,7 +1004,6 @@
                             </div>
                         </div>
                         
-                        <!-- Facility 2: Digital Labs -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="comp lab.png" alt="Computer Lab" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-green-900/95 via-green-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1085,7 +1015,6 @@
                             </div>
                         </div>
                         
-                        <!-- Facility 3: Library -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="https://images.unsplash.com/photo-1568667256549-094345857637?w=600&h=400&fit=crop" alt="Library" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-red-900/95 via-red-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1097,7 +1026,6 @@
                             </div>
                         </div>
                         
-                        <!-- Facility 4: Martial Arts Area -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=600&h=400&fit=crop" alt="Martial Arts Training" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-red-900/95 via-red-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1109,7 +1037,6 @@
                             </div>
                         </div>
                         
-                        <!-- Facility 5: Science Lab -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop" alt="Science Lab" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-purple-900/95 via-purple-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1121,7 +1048,6 @@
                             </div>
                         </div>
                         
-                        <!-- Facility 6: Playground -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&h=400&fit=crop" alt="Playground" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-cyan-900/95 via-cyan-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1133,7 +1059,6 @@
                             </div>
                         </div>
                         
-                        <!-- Facility 7: Prayer Area -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="mosque area.png" alt="Prayer Area" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-emerald-900/95 via-emerald-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1145,7 +1070,6 @@
                             </div>
                         </div>
                         
-                        <!-- Facility 8: Cafeteria -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop" alt="Cafeteria" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-orange-900/95 via-orange-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1157,7 +1081,6 @@
                             </div>
                         </div>
                         
-                        <!-- Facility 9: Security -->
                         <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
                             <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&h=400&fit=crop" alt="Security" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
                             <div class="facility-content absolute inset-0 bg-gradient-to-t from-gray-900/95 via-gray-900/50 to-transparent flex flex-col justify-end p-6">
@@ -1174,10 +1097,8 @@
         </div>
     </section>
 
-    <!-- PAGE 5: CONTACT -->
     <section class="page" id="page-contact">
         <div class="pt-24">
-            <!-- Contact Hero -->
             <div class="hero-pattern py-20 relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h1 class="text-5xl font-bold text-white mb-6">Contact Us</h1>
@@ -1187,11 +1108,9 @@
                 </div>
             </div>
             
-            <!-- Contact Content -->
             <div class="py-20 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid lg:grid-cols-2 gap-16">
-                        <!-- Contact Form -->
                         <div class="scroll-animate">
                             <div class="bg-white rounded-3xl p-8 shadow-xl">
                                 <h2 class="text-3xl font-bold text-gray-800 mb-6">Send Us a Message</h2>
@@ -1219,7 +1138,6 @@
                             </div>
                         </div>
                         
-                        <!-- Contact Info -->
                         <div class="scroll-animate">
                             <h2 class="text-3xl font-bold text-gray-800 mb-8">Contact Information</h2>
                             
@@ -1265,7 +1183,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Social Media -->
                             <div class="mt-8">
                                 <h3 class="font-bold text-gray-800 mb-4">Follow Us</h3>
                                 <div class="flex gap-4">
@@ -1286,11 +1203,9 @@
                         </div>
                     </div>
                     
-                    <!-- Map -->
                     <div class="mt-16 scroll-animate">
                         <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Find Us on Map</h2>
                         <div class="rounded-3xl overflow-hidden shadow-2xl h-96">
-                            <!-- Replace with real Google Maps embed -->
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d989.040190894082!2d3.813683353418285!3d7.44745934168812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1039f5e3ae99da9b%3A0xa05e9c0ef4030c13!2sIDO%20LOCAL%20GOVERNMENT%20SECRETARIAT!5e0!3m2!1sen!2sus!4v1768115754170!5m2!1sen!2sus"
                                 width="100%" 
@@ -1300,7 +1215,6 @@
                                 loading="lazy"
                                 class="grayscale hover:grayscale-0 transition-all duration-500">
                             </iframe>
-                            <!-- Note: Replace the above src with your actual Google Maps embed URL -->
                         </div>
                     </div>
                 </div>
@@ -1308,11 +1222,9 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-12 mb-12">
-                <!-- School Info -->
                 <div>
                     <div class="flex items-center space-x-3 mb-6">
                         <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-500 rounded-xl flex items-center justify-center">
@@ -1341,7 +1253,6 @@
                     </div>
                 </div>
                 
-                <!-- Quick Links -->
                 <div>
                     <h4 class="text-lg font-bold mb-6">Quick Links</h4>
                     <ul class="space-y-3">
@@ -1353,7 +1264,6 @@
                     </ul>
                 </div>
                 
-                <!-- Programs -->
                 <div>
                     <h4 class="text-lg font-bold mb-6">Our Programs</h4>
                     <ul class="space-y-3">
@@ -1365,7 +1275,6 @@
                     </ul>
                 </div>
                 
-                <!-- Contact -->
                 <div>
                     <h4 class="text-lg font-bold mb-6">Contact Info</h4>
                     <ul class="space-y-4">
@@ -1389,7 +1298,6 @@
                 </div>
             </div>
             
-            <!-- Copyright -->
             <div class="border-t border-gray-800 pt-8 text-center">
                 <p class="text-gray-500">
                     © 2021-2026 Viableseedacademy. All Rights Reserved.
@@ -1398,25 +1306,19 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
     <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-red-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all hover:bg-red-700 z-50" onclick="scrollToTop()">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
-        // ============================================
-        // PAGE NAVIGATION
-        // ============================================
+
         function showPage(pageName) {
-            // Hide all pages
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
             });
             
-            // Show selected page
             document.getElementById('page-' + pageName).classList.add('active');
             
-            // Update navigation active state
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
                 if (link.dataset.page === pageName) {
@@ -1424,16 +1326,11 @@
                 }
             });
             
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            // Reinitialize scroll animations
             setTimeout(initScrollAnimations, 100);
         }
         
-        // ============================================
-        // MOBILE MENU
-        // ============================================
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             const icon = document.getElementById('menuIcon');
@@ -1449,9 +1346,6 @@
             }
         }
         
-        // ============================================
-        // CAROUSEL
-        // ============================================
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
         const indicators = document.querySelectorAll('.carousel-indicator');
@@ -1480,17 +1374,12 @@
             showSlide(currentSlide - 1);
         }
         
-        // Auto-advance carousel
         setInterval(nextSlide, 5000);
         
-        // Click on indicators
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => showSlide(index));
         });
         
-        // ============================================
-        // SCROLL ANIMATIONS
-        // ============================================
         function initScrollAnimations() {
             const elements = document.querySelectorAll('.scroll-animate');
             
@@ -1508,9 +1397,6 @@
             elements.forEach(el => observer.observe(el));
         }
         
-        // ============================================
-        // COUNTER ANIMATION
-        // ============================================
         function animateCounters() {
             const counters = document.querySelectorAll('.counter');
             
@@ -1530,7 +1416,6 @@
                     }
                 };
                 
-                // Start animation when element is visible
                 const observer = new IntersectionObserver((entries) => {
                     if (entries[0].isIntersecting) {
                         updateCounter();
@@ -1542,9 +1427,6 @@
             });
         }
         
-        // ============================================
-        // BACK TO TOP BUTTON
-        // ============================================
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1552,8 +1434,7 @@
         window.addEventListener('scroll', () => {
             const backToTop = document.getElementById('backToTop');
             const navbar = document.getElementById('navbar');
-            
-            // Back to top button visibility
+
             if (window.scrollY > 500) {
                 backToTop.classList.remove('opacity-0', 'invisible');
                 backToTop.classList.add('opacity-100', 'visible');
@@ -1562,7 +1443,6 @@
                 backToTop.classList.remove('opacity-100', 'visible');
             }
             
-            // Navbar shadow
             if (window.scrollY > 50) {
                 navbar.classList.add('shadow-xl');
             } else {
@@ -1570,18 +1450,13 @@
             }
         });
         
-        // ============================================
-        // CONTACT FORM
-        // ============================================
+
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('Thank you for your message! We will get back to you soon.');
             this.reset();
         });
-        
-        // ============================================
-        // INITIALIZE
-        // ============================================
+
         document.addEventListener('DOMContentLoaded', () => {
             initScrollAnimations();
             animateCounters();
