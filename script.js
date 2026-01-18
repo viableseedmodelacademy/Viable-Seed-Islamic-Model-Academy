@@ -1,28 +1,27 @@
+// Keep track of the current slide state
+let currentSlide = 0;
+
 function showPage(pageName) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
-    
-    document.getElementById('page-' + pageName).classList.add('active');
-    
+    const targetPage = document.getElementById('page-' + pageName);
+    if (targetPage) targetPage.classList.add('active');
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.dataset.page === pageName) {
             link.classList.add('active');
         }
     });
-    
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    
     setTimeout(initScrollAnimations, 100);
 }
 
 function toggleMobileMenu() {
     const menu = document.getElementById('mobileMenu');
     const icon = document.getElementById('menuIcon');
-    
+    if (!menu || !icon) return;
     menu.classList.toggle('open');
-    
     if (menu.classList.contains('open')) {
         icon.classList.remove('fa-bars');
         icon.classList.add('fa-times');
@@ -32,118 +31,130 @@ function toggleMobileMenu() {
     }
 }
 
-let currentSlide = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-const indicators = document.querySelectorAll('.carousel-indicator');
-
 function showSlide(index) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    
+    if (slides.length === 0) return;
+
+    // Handle index overflow/underflow
+    if (index >= slides.length) {
+        currentSlide = 0;
+    } else if (index < 0) {
+        currentSlide = slides.length - 1;
+    } else {
+        currentSlide = index;
+    }
+
+    // Reset all slides and indicators
     slides.forEach((slide, i) => {
         slide.classList.remove('active');
-        indicators[i].classList.remove('active', 'bg-white');
-        indicators[i].classList.add('bg-white/50');
+        if (indicators[i]) {
+            indicators[i].classList.remove('active', 'bg-white');
+            indicators[i].classList.add('bg-white/50');
+        }
     });
-    
-    currentSlide = index;
-    if (currentSlide >= slides.length) currentSlide = 0;
-    if (currentSlide < 0) currentSlide = slides.length - 1;
-    
+
+    // Activate current slide and indicator
     slides[currentSlide].classList.add('active');
-    indicators[currentSlide].classList.add('active', 'bg-white');
-    indicators[currentSlide].classList.remove('bg-white/50');
+    if (indicators[currentSlide]) {
+        indicators[currentSlide].classList.add('active', 'bg-white');
+        indicators[currentSlide].classList.remove('bg-white/50');
+    }
 }
 
-function nextSlide() {
+window.nextSlide = function() {
     showSlide(currentSlide + 1);
-}
+};
 
-function prevSlide() {
+window.prevSlide = function() {
     showSlide(currentSlide - 1);
-}
-
-setInterval(nextSlide, 5000);
-
-indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => showSlide(index));
-});
+};
 
 function initScrollAnimations() {
     const elements = document.querySelectorAll('.scroll-animate');
-    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
+    }, { threshold: 0.1 });
     elements.forEach(el => observer.observe(el));
 }
 
 function animateCounters() {
     const counters = document.querySelectorAll('.counter');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.dataset.target);
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-        
-        const updateCounter = () => {
-            current += step;
-            if (current < target) {
-                counter.textContent = Math.floor(current) + '+';
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target + '+';
-            }
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                updateCounter();
-                observer.disconnect();
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.dataset.target);
+                let current = 0;
+                const increment = target / 100;
+                const update = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current);
+                        setTimeout(update, 20);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                update();
+                observer.unobserve(counter);
             }
         });
-        
-        observer.observe(counter);
-    });
+    }, { threshold: 1.0 });
+    counters.forEach(counter => observer.observe(counter));
 }
 
-function scrollToTop() {
+window.scrollToTop = function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+};
 
-window.addEventListener('scroll', () => {
+function handleScroll() {
     const backToTop = document.getElementById('backToTop');
-    const navbar = document.getElementById('navbar');
-
-    if (window.scrollY > 500) {
+    if (!backToTop) return;
+    if (window.scrollY > 300) {
         backToTop.classList.remove('opacity-0', 'invisible');
         backToTop.classList.add('opacity-100', 'visible');
     } else {
         backToTop.classList.add('opacity-0', 'invisible');
         backToTop.classList.remove('opacity-100', 'visible');
     }
-    
-    if (window.scrollY > 50) {
-        navbar.classList.add('shadow-xl');
-    } else {
-        navbar.classList.remove('shadow-xl');
-    }
-});
+}
 
-
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Thank you for your message! We will get back to you soon.');
-    this.reset();
-});
-
+// Initialization on Load
 document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+
+    if (slides.length > 0) {
+        // Show the first slide initially
+        showSlide(0);
+
+        // Set up the automatic 5-second interval
+        setInterval(() => {
+            window.nextSlide();
+        }, 5000);
+
+        // Add click listeners to indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => showSlide(index));
+        });
+    }
+
     initScrollAnimations();
     animateCounters();
+    window.addEventListener('scroll', handleScroll);
+
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    }
 });

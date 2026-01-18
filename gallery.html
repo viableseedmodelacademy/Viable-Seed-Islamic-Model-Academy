@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facilities- Viable Seed Model Academy</title>
+    <title>Gallery - Viable Seed Model Academy</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,11 +27,11 @@
             
             <div class="hidden md:flex items-center space-x-8">
                 <a href="index.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="home">Home</a>
-                <a href="about.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="about">About Us</a>
+                <a href="about.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold " data-page="about">About Us</a>
                 <a href="courses.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="courses">Courses</a>
-                <a href="facilities.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold active" daata-page="facilities">Facilities</a>
+                <a href="facilities.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="facilities">Facilities</a>
                 <a href="contact.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="contact">Contact</a>
-                <a href="gallery.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="contact">Gallery</a>
+                <a href="gallery.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold active" data-page="contact">Gallery</a>
                 <button onclick="window.location.href='contact.html'" class="btn-primary text-white px-6 py-3 rounded-full font-semibold">
                     Enroll Now
                 </button>
@@ -63,122 +63,43 @@
     </div>
 </nav>
 
-<section class="page" id="page-facilities">
-    <div class="pt-24">
-        <div class="hero-pattern py-20 relative">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-5xl font-bold text-white mb-6">Our Facilities</h1>
-                <p class="text-xl text-red-100 max-w-3xl mx-auto">
-                    State-of-the-art facilities designed for optimal learning and development
-                </p>
-            </div>
-        </div>
-        
-        <div class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="classroom.png" alt="Modern Classrooms" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-red-900/95 via-red-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-chalkboard-teacher text-red-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Modern Classrooms</h3>
-                            <p class="text-red-100">Spacious, air-conditioned classrooms equipped with smart boards and modern learning aids</p>
-                        </div>
-                    </div>
-                    
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="comp lab.png" alt="Computer Lab" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-green-900/95 via-green-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-desktop text-green-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Digital Labs</h3>
-                            <p class="text-green-100">Well-equipped computer labs with latest hardware and software for hands-on learning</p>
-                        </div>
-                    </div>
-                    
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="https://images.unsplash.com/photo-1568667256549-094345857637?w=600&h=400&fit=crop" alt="Library" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-red-900/95 via-red-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-book text-red-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Well-Stocked Library</h3>
-                            <p class="text-red-100">Extensive collection of books, reference materials, and digital resources</p>
-                        </div>
-                    </div>
-                    
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=600&h=400&fit=crop" alt="Martial Arts Training" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-red-900/95 via-red-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-dumbbell text-red-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Martial Arts Training Area</h3>
-                            <p class="text-red-100">Taekwondo training with professional training equipment</p>
-                        </div>
-                    </div>
-                    
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop" alt="Science Lab" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-purple-900/95 via-purple-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-flask text-purple-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Science Laboratories</h3>
-                            <p class="text-purple-100">A well equiped laboratory for science-based subjects</p>
-                        </div>
-                    </div>
-                    
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=600&h=400&fit=crop" alt="Playground" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-cyan-900/95 via-cyan-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-child text-cyan-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Child-Friendly Playground</h3>
-                            <p class="text-cyan-100">Safe and fun outdoor play area with age-appropriate equipment</p>
-                        </div>
-                    </div>
-                    
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="mosque area.png" alt="Prayer Area" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-emerald-900/95 via-emerald-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-mosque text-emerald-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Prayer Area</h3>
-                            <p class="text-emerald-100">Clean, dedicated prayer space for daily Salah and spiritual activities</p>
-                        </div>
-                    </div>
-                    
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop" alt="Cafeteria" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-orange-900/95 via-orange-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-utensils text-orange-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Hygienic Cafeteria</h3>
-                            <p class="text-orange-100">Clean dining area fornutritious, halal meals and snacks</p>
-                        </div>
-                    </div>
-                    
-                    <div class="facility-item relative group overflow-hidden rounded-3xl scroll-animate">
-                        <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=600&h=400&fit=crop" alt="Security" class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="facility-content absolute inset-0 bg-gradient-to-t from-gray-900/95 via-gray-900/50 to-transparent flex flex-col justify-end p-6">
-                            <div class="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-4">
-                                <i class="fas fa-shield-alt text-gray-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Security Standard</h3>
-                            <p class="text-gray-100">Secure entry systems and strict safety rules</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<section class="page" id="page-gallery">
+<div class="pt-24">
+    <div class="hero-pattern py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl font-bold text-white mb-6">Gallery</h1>
+            <p class="text-xl text-red-100 max-w-3xl mx-auto">
+                Have a glimpse of what happens in our school.....
+            </p>
         </div>
     </div>
+    <div class="profile-scroll-container">
+    <div class="profile-card">
+        <div class="profile-pic">👤</div>
+        <div class="profile-name">Picture 1</div>
+    </div>
+    <div class="profile-card">
+        <div class="profile-pic">👤</div>
+        <div class="profile-name">Picture 2</div>
+    </div>
+    <div class="profile-card">
+        <div class="profile-pic">👤</div>
+        <div class="profile-name">Picture 3</div>
+    </div>
+    <div class="profile-card">
+        <div class="profile-pic">👤</div>
+        <div class="profile-name">Picture 4</div>
+    </div>
+    <div class="profile-card">
+        <div class="profile-pic">👤</div>
+        <div class="profile-name">Picture 5</div>
+    </div>
+    <div class="profile-card">
+        <div class="profile-pic">👤</div>
+        <div class="profile-name">Picture 6</div>
+    </div>
+</div>
+<span><p class="coming">Updates are coming soon.................</p></span>
 </section>
     <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
