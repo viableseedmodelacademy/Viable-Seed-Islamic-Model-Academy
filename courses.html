@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Viable Seed Model Academy</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <a href="https://viableseedmodelacademy.github.io/Viable-Seeds-Islamic-Model-Academy/" class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-=red-500 rounded-xl flex items-center justify-center">
+                    <img src="logo.png" alt="Our logo">
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-red-900">Viable Seed Model Academy</h1>
+                </div>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold " data-page="home">Home</a>
+                <a href="about.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="about">About Us</a>
+                <a href="courses.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold active" data-page="courses">Courses</a>
+                <a href="facilities.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="facilities">Facilities</a>
+                <a href="contact.html" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="contact">Contact</a>
+                <button onclick="window.location.href='contact.html'" class="btn-primary text-white px-6 py-3 rounded-full font-semibold">
+                    Enroll Now
+                </button>
+            </div>
+            
+            <button class="md:hidden text-gray-700 text-2xl" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="mobile-menu fixed top-0 left-0 w-64 h-full bg-white shadow-2xl md:hidden" id="mobileMenu">
+        <div class="p-6">
+            <button class="absolute top-4 right-4 text-gray-500 text-xl" onclick="toggleMobileMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="mt-8 space-y-4">
+                <a href="index.html" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Home</a>
+                <a href="about.html" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">About Us</a>
+                <a href="courses.html" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Courses</a>
+                <a href="facilities.html" onclick="oggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Facilities</a>
+                <a href="contact.html" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Contact</a>
+                <button onclick="window.location.href='contact.html'; toggleMobileMenu();" class="btn-primary text-white px-6 py-3 rounded-full font-semibold w-full mt-4">
+                    Enroll Now
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="page" id="page-courses">
+    <div class="pt-24">
+        <div class="hero-pattern py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl font-bold text-white mb-6">Our Courses</h1>
+                <p class="text-xl text-red-100 max-w-3xl mx-auto">
+                    Discover our comprehensive range of programs designed for holistic development
+                </p>
+            </div>
+        </div>
+        
+        <div class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="soroban.png" alt="Abacus" class="w-full h-full object-cover">
+                            <div class="overlay absolute inset-0 bg-gradient-to-t from-red-900/90 to-transparent flex items-end p-4">
+                                <span class="text-white text-sm font-semibold">View Details</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-calculator text-red-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Abacus Training</h3>
+                            <p class="text-gray-600 text-sm">
+                                Enhance mental arithmetic skills, concentration, and brain development through ancient abacus techniques adapted for modern learning.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop" alt="Robotics" class="w-full h-full object-cover">
+                            <div class="overlay absolute inset-0 bg-gradient-to-t from-green-900/90 to-transparent flex items-end p-4">
+                                <span class="text-white text-sm font-semibold">View Details</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-robot text-green-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Robotics</h3>
+                            <p class="text-gray-600 text-sm">
+                                Hands-on robotics education teaching engineering principles, programming, and problem-solving through building and programming robots.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop" alt="Coding" class="w-full h-full object-cover">
+                            <div class="overlay absolute inset-0 bg-gradient-to-t from-purple-900/90 to-transparent flex items-end p-4">
+                                <span class="text-white text-sm font-semibold">View Details</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-code text-purple-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Coding & Programming</h3>
+                            <p class="text-gray-600 text-sm">
+                                Learn to code with age-appropriate programming languages including Scratch, Python, and web development fundamentals.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="mosque.png" alt="Islamic Studies" class="w-full h-full object-cover">
+                            <div class="overlay absolute inset-0 bg-gradient-to-t from-red-900/90 to-transparent flex items-end p-4">
+                                <span class="text-white text-sm font-semibold">View Details</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-mosque text-red-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Islamic Studies</h3>
+                            <p class="text-gray-600 text-sm">
+                                Comprehensive Islamic education including Fiqh, Hadith, Seerah, and Islamic history taught by qualified Islamic scholars.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="reading quran.png" alt="Quran" class="w-full h-full object-cover">
+                            <div class="overlay absolute inset-0 bg-gradient-to-t from-emerald-900/90 to-transparent flex items-end p-4">
+                                <span class="text-white text-sm font-semibold">View Details</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-quran text-emerald-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Qur'an Memorization</h3>
+                            <p class="text-gray-600 text-sm">
+                                Structured Hifz program with qualified Huffaz, focusing on proper Tajweed, memorization, and understanding of the Holy Qur'an.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=200&fit=crop" alt="Digital Literacy" class="w-full h-full object-cover">
+                            <div class="overlay absolute inset-0 bg-gradient-to-t from-cyan-900/90 to-transparent flex items-end p-4">
+                                <span class="text-white text-sm font-semibold">View Details</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-laptop text-cyan-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Digital Literacy</h3>
+                            <p class="text-gray-600 text-sm">
+                                Essential computer skills, internet safety, digital citizenship, and productivity tools for the modern world.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?w=400&h=200&fit=crop" alt="Taekwondo" class="w-full h-full object-cover">
+                            <div class="overlay absolute inset-0 bg-gradient-to-t from-red-900/90 to-transparent flex items-end p-4">
+                                <span class="text-white text-sm font-semibold">View Details</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-fist-raised text-red-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Martial Arts (Taekwondo)</h3>
+                            <p class="text-gray-600 text-sm">
+                                Professional Taekwondo training promoting discipline, self-defense, physical fitness, and mental strength.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card card-hover bg-white rounded-3xl overflow-hidden shadow-lg scroll-animate">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=200&fit=crop" alt="Western Education" class="w-full h-full object-cover">
+                            <div class="overlay absolute inset-0 bg-gradient-to-t from-indigo-900/90 to-transparent flex items-end p-4">
+                                <span class="text-white text-sm font-semibold">View Details</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                                <i class="fas fa-globe text-indigo-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Quality Western Education</h3>
+                            <p class="text-gray-600 text-sm">
+                                Internationally recognized curriculum covering Mathematics, Science, English, Social Studies, and more.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="py-20 bg-gradient-to-br from-pink-600 to-red-600">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-animate">
+                <h2 class="text-4xl font-bold text-white mb-6">Ready to Enroll Your Child?</h2>
+                <p class="text-xl text-red-100 mb-8">
+                    Give your child the gift of quality education combined with moral excellence
+                </p>
+                <button onclick="showPage('contact')" class="btn-secondary text-blue-900 px-10 py-4 rounded-full font-bold text-lg">
+                    Contact Us Today
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-12 mb-12">
+            <div>
+
+                <div class="flex items-center space-x-3 mb-6">
+                    <a href="https://viableseedmodelacademy.github.io/Viable-Seeds-Islamic-Model-Academy/" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-500 rounded-xl flex items-center justify-center">
+                        <img src="logo.png" alt="Our logo">
+                    </div></a>
+                    <div>
+                        <h3 class="text-xl font-bold">Viable Seed Islamic Model Acaademy</h3>
+                    </div>
+                </div>
+                <p class="text-gray-400 mb-6">
+                    Nurturing minds, building character, shaping futures.
+                </p>
+                <div class="flex gap-3">
+                    <a href="https://www.facebook.com/profile.php?id=61580915043420" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-red-600 transition-all">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-all">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-sky-500 transition-all">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-red-600 transition-all">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                <ul class="space-y-3">
+                    <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Home</a></li>
+                    <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> About Us</a></li>
+                    <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Courses</a></li>
+                    <li><a href="facilities.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Facilities</a></li>
+                    <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold mb-6">Our Programs</h4>
+                <ul class="space-y-3">
+                    <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Western Education</a></li>
+                    <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Islamic Studies</a></li>
+                    <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Qur'an Memorization</a></li>
+                    <li><a href="courses.html"  class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Coding & Robotics</a></li>
+                    <li><a href="courses.html" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Taekwondo</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-lg font-bold mb-6">Contact Info</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-map-marker-alt text-red-500 mt-1"></i>
+                        <span class="text-gray-400">Idi-Obi Junction, Adjacent Ojo Block Industry, Off Eleyele-Ido Road, Ibadan.</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-phone text-red-500"></i>
+                        <span class="text-gray-400">08034203098, 08127693669</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fab fa-whatsapp text-red-500"></i>
+                        <span class="text-gray-400">+2348034203098</span>
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-red-500"></i>
+                        <span class="text-gray-400">vsimafrontdesk@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="border-t border-gray-800 pt-8 text-center">
+            <p class="text-gray-500">
+                © 2021-2026 Viableseedacademy. All Rights Reserved.
+            </p>
+        </div>
+    </div>
+</footer>
+
+<button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-red-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all hover:bg-red-700 z-50" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+</body>
+</html>
