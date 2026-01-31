@@ -3,67 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viable Seed Islamic Model Academy - Admin Login</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Login - Viable Seed Islamic Model Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="stylest.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="auth.js"></script>
-    <link rel="stylesheet" href="log.css">
-
+    <script src="https://www.google.com/recaptcha/api.js?render=6LccbFwsAAAAAMqRmdoAqn-25xLz2E6zqS0cTJRU"></script>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4">
-    <div class="islamic-pattern"></div>
-    
-    <div class="glass-card rounded-3xl p-8 md:p-10 w-full max-w-md relative z-10">
-        <div class="flex flex-col items-center mb-8">
-            <div class="floating mb-6">
-                <img 
-                    src="logosp.png" 
-                    alt="VSMA Logo" 
-                    class="w-24 h-24 md:w-28 md:h-28 object-contain logo-glow rounded-full">
+<body class="min-h-screen gradient-bg islamic-pattern flex items-center justify-center p-4">
+    <div class="glassmorphism rounded-3xl p-8 w-full max-w-md shadow-2xl">
+        <div class="text-center mb-8">
+            <div class="floating-logo w-24 h-24 mx-auto mb-4 bg-pink rounded-full flex items-center justify-center shadow-lg">
+                <img src="logo.png" alt="logo" class="w-16 h-16 object-contain">
             </div>
-            <h1 class="text-red-200 text-xl md:text-2xl font-bold text-center tracking-wide">
-                Viable Seed Islamic Model Academy
-            </h1>
-            <div class="w-16 h-1 bg-gradient-to-r from-transparent via-green-600 to-transparent mt-3 rounded-full"></div>
+            <h1 class="text-2xl font-bold text-white mb-1">Viable Seed Islamic</h1>
+            <h2 class="text-xl font-semibold text-white/90">Model Academy</h2>
+            <p class="text-white/70 text-sm mt-2">Sign in to your account</p>
         </div>
-        
-        <form id="loginForm" class="space-y-5">   
-            <div class="green-accent pl-4">
-                <label class="block text-white text-sm font-medium mb-2 opacity-90">Email</label>
-                <input 
-                    type="email" 
-                    id="email"
-                    placeholder="Enter email"
-                    required
-                    class="input-field w-full px-4 py-3 rounded-xl text-white text-sm md:text-base"
-                >
-            </div>
-            
-            <div class="green-accent pl-4">
-                <label class="block text-white text-sm font-medium mb-2 opacity-90">Password</label>
-                <input 
-                    type="password" 
-                    id="password"
-                    placeholder="Enter your password"
-                    required
-                    class="input-field w-full px-4 py-3 rounded-xl text-white text-sm md:text-base"
-                >
+
+        <form id="loginForm" class="space-y-5">
+            <div>
+                <label class="block text-white/90 text-sm font-medium mb-2">Email Address</label>
+                <input type="email" id="email" required
+                    class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
+                    placeholder="Enter your email">
             </div>
 
-            <div id="errorMessage" class="error-message hidden text-red-200 text-sm p-3 rounded-xl text-center">
-                Invalid credentials. Access denied.
+            <div>
+                <label class="block text-white/90 text-sm font-medium mb-2">Password</label>
+                <div class="relative">
+                    <input type="password" id="password" required
+                        class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 transition pr-12"
+                        placeholder="Enter your password">
+                    <button type="button" id="togglePassword" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition">
+                        <svg id="eyeIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                        </svg>
+                        <svg id="eyeOffIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
-            
-            <button 
-                type="submit" 
-                id="loginBtn"
-                class="login-btn w-full py-4 rounded-xl text-white font-semibold text-base md:text-lg shadow-lg mt-6"
-            >
-                Login
+
+            <div class="flex items-center justify-between text-sm">
+                <label class="flex items-center text-white/80 cursor-pointer">
+                    <input type="checkbox" class="mr-2 rounded">
+                    Remember me
+                </label>
+                <a href="https://wa.link/mhuzju" class="text-white/80 hover:text-white transition">Forgot password?</a>
+            </div>
+
+            <button type="submit" id="submitBtn"
+                class="w-full py-3 bg-white text-[#FF0000] font-bold rounded-xl hover:bg-white/90 transition transform hover:scale-[1.02] active:scale-[0.98] shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                <span id="btnText">Sign In</span>
+                <span id="btnLoader" class="hidden">
+                    <svg class="animate-spin h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </span>
             </button>
         </form>
+
+        <div id="errorMsg" class="hidden mt-4 p-3 bg-red-500/30 border border-red-400/50 rounded-xl text-white text-sm text-center"></div>
+
+        <p class="text-center text-white/60 text-xs mt-6">
+            Protected by VSMA
+        </p>
     </div>
-    
-    <p class="text-white text-xs opacity-50 mt-8 relative z-10">Protected by VSMA</p>
-    </body>
+    <script src="scriptest.js"></script>
+</body> 
 </html>
