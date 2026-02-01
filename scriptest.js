@@ -35,11 +35,11 @@ function setLoading(loading) {
 
 function redirectByRole(email) {
     if (email.endsWith('@admin.vsma')) {
-        window.location.href = '/admin';
+        window.location.href = 'admin.html';
     } else if (email.endsWith('@teacher.vsma')) {
-        window.location.href = '/teacher';
+        window.location.href = 'teacher.html';
     } else if (email.endsWith('@parent.vsma')) {
-        window.location.href = '/parent';
+        window.location.href = 'parent.html';
     }
 }
 
@@ -51,37 +51,46 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    try {
-        grecaptcha.ready(async () => {
-            try {
-                const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'login' });
-
-                const { data, error } = await supabaseClient.auth.signInWithPassword({
-                    email: email,
-                    password: password,
-                    options: {
-                        captchaToken: token 
-                    }
-                });
-
-                if (error) {
-                    showError(error.message);
-                    setLoading(false);
-                    return;
-                }
-
-                if (data.user) {
-                    redirectByRole(data.user.email);
-                }
-            } catch (captchaErr) {
-                showError('Captcha verification failed. Please refresh and try again.');
-                setLoading(false);
-            }
-        });
-    } catch (err) {
-        showError('An error occurred. Please try again.');
+    // Ensure grecaptcha is available
+    if (typeof grecaptcha === 'undefined') {
+        showError('reCAPTCHA failed to load. Please check your connection.');
         setLoading(false);
+        return;
     }
+
+    grecaptcha.ready(async () => {
+        try {
+            // Generate the v3 token
+            const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'login' });
+            
+            if (!token) {
+                throw new Error('Failed to acquire captcha token.');
+            }
+
+            // Perform Supabase Login
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password,
+                // Note: If you have "Captcha Protection" ON in Supabase, 
+                // it will still look for hCaptcha/Turnstile. 
+                // Keep the toggle OFF in Supabase dashboard to use Google reCAPTCHA v3 manually.
+            });
+
+            if (error) {
+                showError(error.message);
+                setLoading(false);
+                return;
+            }
+
+            if (data.user) {
+                redirectByRole(data.user.email);
+            }
+        } catch (err) {
+            console.error(err);
+            showError('Security check failed. Please try again.');
+            setLoading(false);
+        }
+    });
 });
 
 (async () => {
