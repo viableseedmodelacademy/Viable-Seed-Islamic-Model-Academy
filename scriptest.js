@@ -35,11 +35,11 @@ function setLoading(loading) {
 
 function redirectByRole(email) {
     if (email.endsWith('@admin.vsma')) {
-        window.location.href = 'admin.html';
+        window.location.href = '/admin';
     } else if (email.endsWith('@teacher.vsma')) {
-        window.location.href = 'teacher.html';
+        window.location.href = '/teacher';
     } else if (email.endsWith('@parent.vsma')) {
-        window.location.href = 'parent.html';
+        window.location.href = '/parent';
     }
 }
 
@@ -52,7 +52,6 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     const password = document.getElementById('password').value;
 
     try {
-        // MODIFIED: Wrapped in grecaptcha.ready to ensure the library is loaded
         grecaptcha.ready(async () => {
             try {
                 const token = await grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'login' });
