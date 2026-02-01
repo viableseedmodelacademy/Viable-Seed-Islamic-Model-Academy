@@ -10,13 +10,23 @@
     <style>
         * { font-family: 'Poppins', sans-serif; }
         body { background-color: #1D1D20; }
-        .sidebar { background-color: #151517; }
+        .sidebar { background-color: #151517; transition: transform 0.3s ease-in-out; }
         .accent { color: #FFB300; }
         .accent-bg { background-color: #FFB300; }
         .card { background-color: #27272A; }
+
+        /* Custom Mobile Sidebar Logic */
+        @media (max-width: 1024px) {
+            .sidebar-hidden { transform: translateX(-100%); }
+            .sidebar-visible { transform: translateX(0); }
+            .overlay { display: none; }
+            .overlay.active { display: block; }
+        }
     </style>
 </head>
-<body class="min-h-screen text-white">
+<body class="min-h-screen text-white overflow-x-hidden">
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-40 lg:hidden overlay"></div>
+
     <div id="loadingScreen" class="fixed inset-0 bg-[#1D1D20] flex items-center justify-center z-50">
         <div class="text-center">
             <svg class="animate-spin h-12 w-12 mx-auto text-amber-400" fill="none" viewBox="0 0 24 24">
@@ -27,173 +37,170 @@
         </div>
     </div>
 
-    <div id="mainContent" class="hidden">
-        <aside class="fixed left-0 top-0 h-full w-64 sidebar border-r border-white/10 p-6">
-            <div class="flex items-center gap-3 mb-10">
-                <div class="w-12 h-12 accent-bg rounded-xl flex items-center justify-center">
-                    <svg class="w-7 h-7 text-black" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
+    <div id="mainContent" class="hidden flex">
+        <aside id="sidebar" class="fixed left-0 top-0 h-full w-64 sidebar border-r border-white/10 p-6 z-50 lg:translate-x-0 sidebar-hidden">
+            <div class="flex items-center justify-between mb-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 accent-bg rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg leading-none">VSIMA</h1>
+                        <p class="text-[10px] text-white/50 uppercase tracking-wider">Admin Portal</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="font-bold text-lg">VSIMA</h1>
-                    <p class="text-xs text-white/50">Admin Portal</p>
-                </div>
+                <button id="closeMobileMenu" class="lg:hidden p-2 text-white/50 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
             </div>
 
             <nav class="space-y-2">
                 <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-amber-400/10 text-amber-400">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                    Dashboard
+                    <span class="text-sm font-medium">Dashboard</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/></svg>
-                    Users
+                    <span class="text-sm font-medium">Users</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    Classes
+                    <span class="text-sm font-medium">Classes</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    Fees
+                    <span class="text-sm font-medium">Fees</span>
                 </a>
                 <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                    Reports
-                </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-white/70 hover:bg-white/5 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    Settings
+                    <span class="text-sm font-medium">Reports</span>
                 </a>
             </nav>
 
             <div class="absolute bottom-6 left-6 right-6">
                 <button id="logoutBtn" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-400/10 transition">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                    Logout
+                    <span class="text-sm font-medium">Logout</span>
                 </button>
             </div>
         </aside>
 
-        <main class="ml-64">
-            <header class="h-16 border-b border-white/10 flex items-center justify-between px-8">
-                <div>
-                    <h2 class="text-xl font-semibold">Dashboard</h2>
-                    <p class="text-sm text-white/50">Welcome back, Administrator</p>
-                </div>
+        <main class="flex-1 lg:ml-64 min-w-0 transition-all duration-300">
+            <header class="h-16 border-b border-white/10 flex items-center justify-between px-4 lg:px-8 bg-[#1D1D20] sticky top-0 z-30">
                 <div class="flex items-center gap-4">
-                    <button class="relative p-2 rounded-xl hover:bg-white/5 transition">
-                        <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-amber-400 rounded-full"></span>
+                    <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-lg hover:bg-white/5">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/></svg>
                     </button>
-                    <div class="w-10 h-10 accent-bg rounded-full flex items-center justify-center font-bold text-black">A</div>
+                    <div>
+                        <h2 class="text-lg lg:text-xl font-semibold leading-tight">Dashboard</h2>
+                        <p class="hidden sm:block text-xs text-white/50">Welcome back, Administrator</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button class="relative p-2 rounded-xl hover:bg-white/5 transition">
+                        <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-amber-400 rounded-full border-2 border-[#1D1D20]"></span>
+                    </button>
+                    <div class="w-9 h-9 accent-bg rounded-full flex items-center justify-center font-bold text-black text-sm">A</div>
                 </div>
             </header>
 
-            <div class="p-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="card rounded-2xl p-6">
+            <div class="p-4 lg:p-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6 mb-8">
+                    <div class="card rounded-2xl p-5 lg:p-6 border border-white/5">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-white/50 text-sm">Total Students</span>
-                            <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                            <span class="text-white/50 text-xs lg:text-sm uppercase tracking-wider">Total Students</span>
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
                                 <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
                             </div>
                         </div>
-                        <p class="text-3xl font-bold">1,248</p>
-                        <p class="text-green-400 text-sm mt-1">+12% from last month</p>
+                        <p class="text-2xl lg:text-3xl font-bold">1,248</p>
+                        <p class="text-green-400 text-xs mt-1">▲ 12% increase</p>
                     </div>
-                    <div class="card rounded-2xl p-6">
+                    <div class="card rounded-2xl p-5 lg:p-6 border border-white/5">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-white/50 text-sm">Total Teachers</span>
-                            <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center">
+                            <span class="text-white/50 text-xs lg:text-sm uppercase tracking-wider">Total Teachers</span>
+                            <div class="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
                                 <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                             </div>
                         </div>
-                        <p class="text-3xl font-bold">86</p>
-                        <p class="text-green-400 text-sm mt-1">+3 new this term</p>
+                        <p class="text-2xl lg:text-3xl font-bold">86</p>
+                        <p class="text-green-400 text-xs mt-1">▲ 3 new this term</p>
                     </div>
-                    <div class="card rounded-2xl p-6">
+                    <div class="card rounded-2xl p-5 lg:p-6 border border-white/5">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-white/50 text-sm">Fee Collection</span>
-                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center">
+                            <span class="text-white/50 text-xs lg:text-sm uppercase tracking-wider">Fees</span>
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
                                 <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
                         </div>
-                        <p class="text-3xl font-bold">₦12.4M</p>
-                        <p class="text-amber-400 text-sm mt-1">78% collected</p>
+                        <p class="text-2xl lg:text-3xl font-bold">₦12.4M</p>
+                        <p class="text-amber-400 text-xs mt-1">78% collected</p>
                     </div>
-                    <div class="card rounded-2xl p-6">
+                    <div class="card rounded-2xl p-5 lg:p-6 border border-white/5">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="text-white/50 text-sm">Attendance Rate</span>
-                            <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                            <span class="text-white/50 text-xs lg:text-sm uppercase tracking-wider">Attendance</span>
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
                                 <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             </div>
                         </div>
-                        <p class="text-3xl font-bold">94.2%</p>
-                        <p class="text-green-400 text-sm mt-1">+2.1% improvement</p>
+                        <p class="text-2xl lg:text-3xl font-bold">94.2%</p>
+                        <p class="text-green-400 text-xs mt-1">▲ 2% up</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="lg:col-span-2 card rounded-2xl p-6">
+                    <div class="lg:col-span-2 card rounded-2xl p-6 border border-white/5">
                         <h3 class="text-lg font-semibold mb-6">Quick Actions</h3>
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <button class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
-                                <div class="w-12 h-12 mx-auto rounded-xl bg-blue-500/20 flex items-center justify-center mb-3">
+                            <button class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition group">
+                                <div class="w-12 h-12 mx-auto rounded-xl bg-blue-500/10 flex items-center justify-center mb-3 group-hover:scale-110 transition">
                                     <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
                                 </div>
-                                <span class="text-sm">Add Student</span>
+                                <span class="text-xs font-medium block">Add Student</span>
                             </button>
-                            <button class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
-                                <div class="w-12 h-12 mx-auto rounded-xl bg-green-500/20 flex items-center justify-center mb-3">
+                            <button class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition group">
+                                <div class="w-12 h-12 mx-auto rounded-xl bg-green-500/10 flex items-center justify-center mb-3 group-hover:scale-110 transition">
                                     <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
                                 </div>
-                                <span class="text-sm">Add Teacher</span>
+                                <span class="text-xs font-medium block">Add Teacher</span>
                             </button>
-                            <button class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
-                                <div class="w-12 h-12 mx-auto rounded-xl bg-amber-500/20 flex items-center justify-center mb-3">
+                            <button class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition group">
+                                <div class="w-12 h-12 mx-auto rounded-xl bg-amber-500/10 flex items-center justify-center mb-3 group-hover:scale-110 transition">
                                     <svg class="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                                 </div>
-                                <span class="text-sm">Schedule</span>
+                                <span class="text-xs font-medium block">Schedule</span>
                             </button>
-                            <button class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition text-center">
-                                <div class="w-12 h-12 mx-auto rounded-xl bg-purple-500/20 flex items-center justify-center mb-3">
+                            <button class="p-4 rounded-xl bg-white/5 hover:bg-white/10 transition group">
+                                <div class="w-12 h-12 mx-auto rounded-xl bg-purple-500/10 flex items-center justify-center mb-3 group-hover:scale-110 transition">
                                     <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
                                 </div>
-                                <span class="text-sm">Announce</span>
+                                <span class="text-xs font-medium block">Announce</span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="card rounded-2xl p-6">
+                    <div class="card rounded-2xl p-6 border border-white/5">
                         <h3 class="text-lg font-semibold mb-6">Recent Activity</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full bg-green-500/10 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm">New student enrolled</p>
-                                    <p class="text-xs text-white/50">2 minutes ago</p>
+                                    <p class="text-sm font-medium">New student enrolled</p>
+                                    <p class="text-xs text-white/40">2 minutes ago</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                            <div class="flex items-start gap-4">
+                                <div class="w-8 h-8 rounded-full bg-amber-500/10 flex items-center justify-center flex-shrink-0">
                                     <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2"/></svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm">Fee payment received</p>
-                                    <p class="text-xs text-white/50">15 minutes ago</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-3">
-                                <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                                </div>
-                                <div>
-                                    <p class="text-sm">Report generated</p>
-                                    <p class="text-xs text-white/50">1 hour ago</p>
+                                    <p class="text-sm font-medium">Fee payment received</p>
+                                    <p class="text-xs text-white/40">15 minutes ago</p>
                                 </div>
                             </div>
                         </div>
@@ -204,6 +211,24 @@
     </div>
 
     <script>
+        // Sidebar Responsive Logic
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const openBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeMobileMenu');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('sidebar-hidden');
+            sidebar.classList.toggle('sidebar-visible');
+            overlay.classList.toggle('active');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        openBtn.addEventListener('click', toggleSidebar);
+        closeBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // Supabase Logic
         const { createClient } = supabase;
         const supabaseClient = createClient('https://chhkghparlgsikxzxasw.supabase.co', 'sb_publishable_z0Fv9IFDXOCCdCCUqF6j0w_J0bWFIET');
 
