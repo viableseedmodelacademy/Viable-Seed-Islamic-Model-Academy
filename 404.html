@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { font-family: 'Poppins', sans-serif; }
-        body { background-color: #FDFDFD; }
+        body { background-color: #c0084f; }
         .gradient-text { 
-            background: linear-gradient(135deg, #1e293b 0%, #475569 100%); 
+            background: linear-gradient(135deg, #ff0000 0%, #f00000 100%); 
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent; 
         }
@@ -33,16 +33,16 @@
 
         <h1 class="text-3xl font-bold gradient-text mb-4">Something went wrong</h1>
         <p class="text-slate-500 text-lg leading-relaxed mb-10">
-            Sorry, your page couldn't be found. It might have been moved, deleted, or perhaps there's a typo in the address.
+            Sorry, we couldn't find the site you are looking for. It might have been moved, deleted, or perhaps there's a typo in the address.
         </p>
 
         <div class="space-y-4">
-            <a href="index.html" class="inline-block w-full sm:w-auto px-10 py-4 bg-slate-900 text-white rounded-2xl font-bold shadow-xl shadow-slate-200 hover:bg-slate-800 hover:scale-[1.02] active:scale-95 transition-all">
+            <a href="index.html" class="inline-block w-full sm:w-auto px-10 py-4 bg-red-900 text-white rounded-2xl font-bold shadow-xl shadow-slate-200 hover:bg-red-800 hover:scale-[1.02] active:scale-95 transition-all">
                 Return to Homepage
             </a>
             
             <div class="pt-4">
-                <button onclick="history.back()" class="text-slate-400 hover:text-slate-600 font-semibold text-sm transition-colors flex items-center justify-center gap-2 mx-auto">
+                <button onclick="history.back()" class="text-red-400 hover:text-red-600 font-semibold text-sm transition-colors flex items-center justify-center gap-2 mx-auto">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
                     Go Back
                 </button>
