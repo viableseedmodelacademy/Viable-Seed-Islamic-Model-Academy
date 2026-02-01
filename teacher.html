@@ -2,202 +2,165 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Dashboard - Viable Seed Islamic Model Academy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Teacher Dashboard - VSIMA</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        * { font-family: 'Poppins', sans-serif; }
+        * { font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: #F9FAFB; overflow-x: hidden; }
+        .sidebar { transition: transform 0.3s ease-in-out; }
+        
+        #sidebarOverlay.active { opacity: 1; pointer-events: auto; }
+        
+        @media (min-width: 1024px) {
+            ::-webkit-scrollbar { width: 6px; }
+            ::-webkit-scrollbar-track { background: #f1f1f1; }
+            ::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
+            ::-webkit-scrollbar-thumb:hover { background: #d1d5db; }
+        }
     </style>
 </head>
-<body class="min-h-screen bg-gray-50">
-    <div id="loadingScreen" class="fixed inset-0 bg-white flex items-center justify-center z-50">
+<body class="min-h-screen text-gray-800">
+    <div id="loadingScreen" class="fixed inset-0 bg-white flex items-center justify-center z-[100]">
         <div class="text-center">
-            <svg class="animate-spin h-12 w-12 mx-auto text-green-600" fill="none" viewBox="0 0 24 24">
+            <svg class="animate-spin h-10 w-10 mx-auto text-green-600" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            <p class="mt-4 text-gray-500">Verifying access...</p>
+            <p class="mt-4 text-sm text-gray-400 font-medium tracking-wide">Securing Portal...</p>
         </div>
     </div>
 
-    <div id="mainContent" class="hidden">
-        <aside class="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 p-6 shadow-sm">
-            <div class="flex items-center gap-3 mb-10">
-                <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center">
-                    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
+    <div id="sidebarOverlay" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity z-30 lg:hidden"></div>
+
+    <div id="mainContent" class="hidden flex">
+        <aside id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-white border-r border-gray-200 p-6 z-40 -translate-x-full lg:translate-x-0 sidebar shadow-2xl lg:shadow-none">
+            <div class="flex items-center justify-between mb-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-green-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-200">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-gray-900 leading-tight">VSIMA</h1>
+                        <p class="text-[10px] text-gray-400 uppercase font-semibold tracking-wider">Teacher</p>
+                    </div>
                 </div>
-                <div>
-                    <h1 class="font-bold text-lg text-gray-800">VSIMA</h1>
-                    <p class="text-xs text-gray-500">Teacher Portal</p>
-                </div>
+                <button id="closeSidebar" class="lg:hidden p-2 text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
             </div>
 
-            <nav class="space-y-2">
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-green-50 text-green-600 font-medium">
+            <nav class="space-y-1">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-green-50 text-green-600 font-semibold transition-all">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     My Classes
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                     Assignments
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-all">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197"/></svg>
                     Students
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-all">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
                     Messages
                 </a>
-                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                    Profile
-                </a>
             </nav>
 
-            <div class="absolute bottom-6 left-6 right-6">
-                <button id="logoutBtn" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition">
+            <div class="absolute bottom-8 left-6 right-6">
+                <button id="logoutBtn" class="w-full flex items-center justify-center lg:justify-start gap-3 px-4 py-3 rounded-xl text-red-500 hover:bg-red-50 transition-colors border border-red-100 lg:border-none">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                    Logout
+                    <span class="font-semibold">Logout</span>
                 </button>
             </div>
         </aside>
 
-        <main class="ml-64">
-            <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8">
-                <div>
-                    <h2 class="text-xl font-semibold text-gray-800">My Classes</h2>
-                    <p class="text-sm text-gray-500">Manage your classes and students</p>
-                </div>
+        <main class="flex-1 lg:ml-64 w-full min-h-screen">
+            <header class="sticky top-0 z-20 h-16 bg-white/80 backdrop-blur-md border-b border-gray-100 flex items-center justify-between px-4 lg:px-8">
                 <div class="flex items-center gap-4">
-                    <button class="relative p-2 rounded-xl hover:bg-gray-100 transition">
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-green-500 rounded-full"></span>
+                    <button id="menuBtn" class="lg:hidden p-2 -ml-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                     </button>
-                    <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">T</div>
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900 leading-tight">My Classes</h2>
+                        <p class="hidden sm:block text-[11px] text-gray-400 font-medium">Viable Seed Islamic Model Academy</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <button class="relative p-2 rounded-full hover:bg-gray-100 transition-colors">
+                        <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-green-500 rounded-full border-2 border-white"></span>
+                    </button>
+                    <div class="w-9 h-9 bg-green-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md">T</div>
                 </div>
             </header>
 
-            <div class="p-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-gray-500 text-sm">Total Classes</span>
-                            <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
-                                <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                            </div>
+            <div class="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-row sm:flex-col items-center sm:items-start justify-between sm:justify-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16"/></svg>
                         </div>
-                        <p class="text-3xl font-bold text-gray-800">6</p>
-                        <p class="text-green-600 text-sm mt-1">Active classes</p>
+                        <div>
+                            <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider mb-0.5">Classes</p>
+                            <p class="text-2xl font-black text-gray-900">6</p>
+                        </div>
                     </div>
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-gray-500 text-sm">Total Students</span>
-                            <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-                            </div>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-row sm:flex-col items-center sm:items-start justify-between sm:justify-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1"/></svg>
                         </div>
-                        <p class="text-3xl font-bold text-gray-800">156</p>
-                        <p class="text-blue-600 text-sm mt-1">Across all classes</p>
+                        <div>
+                            <p class="text-[11px] text-gray-400 font-bold uppercase tracking-wider mb-0.5">Students</p>
+                            <p class="text-2xl font-black text-gray-900">156</p>
+                        </div>
                     </div>
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-gray-500 text-sm">Pending Assignments</span>
-                            <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
-                                <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                            </div>
-                        </div>
-                        <p class="text-3xl font-bold text-gray-800">23</p>
-                        <p class="text-amber-600 text-sm mt-1">Need grading</p>
-                    </div>
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-gray-500 text-sm">Messages</span>
-                            <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
-                                <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-                            </div>
-                        </div>
-                        <p class="text-3xl font-bold text-gray-800">8</p>
-                        <p class="text-purple-600 text-sm mt-1">Unread messages</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-800">Today's Schedule</h3>
-                            <button class="text-green-600 text-sm font-medium hover:underline">View All</button>
-                        </div>
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4 p-4 rounded-xl bg-green-50 border-l-4 border-green-500">
-                                <div class="text-center">
-                                    <p class="text-xs text-gray-500">8:00 AM</p>
-                                    <p class="text-xs text-gray-500">9:30 AM</p>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="font-medium text-gray-800">Islamic Studies - Grade 5A</p>
-                                    <p class="text-sm text-gray-500">Room 102</p>
-                                </div>
-                                <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium">Now</span>
-                            </div>
-                            <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50">
-                                <div class="text-center">
-                                    <p class="text-xs text-gray-500">10:00 AM</p>
-                                    <p class="text-xs text-gray-500">11:30 AM</p>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="font-medium text-gray-800">Arabic - Grade 6B</p>
-                                    <p class="text-sm text-gray-500">Room 105</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4 p-4 rounded-xl bg-gray-50">
-                                <div class="text-center">
-                                    <p class="text-xs text-gray-500">1:00 PM</p>
-                                    <p class="text-xs text-gray-500">2:30 PM</p>
-                                </div>
-                                <div class="flex-1">
-                                    <p class="font-medium text-gray-800">Quran Recitation - Grade 4C</p>
-                                    <p class="text-sm text-gray-500">Room 108</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                <div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
                         <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-800">Recent Submissions</h3>
-                            <button class="text-green-600 text-sm font-medium hover:underline">Grade All</button>
+                            <h3 class="font-black text-gray-900 tracking-tight">Today's Schedule</h3>
+                            <button class="text-green-600 text-xs font-bold hover:underline">Full View</button>
                         </div>
-                        <div class="space-y-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold">A</div>
-                                <div class="flex-1">
-                                    <p class="font-medium text-gray-800">Ahmad Ibrahim</p>
-                                    <p class="text-sm text-gray-500">Surah Al-Baqarah Assignment</p>
+                        <div class="space-y-3">
+                            <div class="group flex items-center gap-4 p-4 rounded-2xl bg-green-50 border border-green-100 transition-all hover:shadow-md">
+                                <div class="text-center min-w-[65px] border-r border-green-200 pr-4">
+                                    <p class="text-xs font-bold text-green-700">08:00</p>
+                                    <p class="text-[10px] text-green-600/70 font-medium uppercase">Start</p>
                                 </div>
-                                <span class="text-xs text-gray-400">2h ago</span>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold">F</div>
                                 <div class="flex-1">
-                                    <p class="font-medium text-gray-800">Fatima Yusuf</p>
-                                    <p class="text-sm text-gray-500">Arabic Vocabulary Test</p>
+                                    <p class="font-bold text-gray-900 text-sm">Islamic Studies</p>
+                                    <p class="text-xs text-gray-500">Grade 5A • Room 102</p>
                                 </div>
-                                <span class="text-xs text-gray-400">4h ago</span>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white font-bold">M</div>
-                                <div class="flex-1">
-                                    <p class="font-medium text-gray-800">Muhammad Ali</p>
-                                    <p class="text-sm text-gray-500">Islamic History Essay</p>
+                                <div class="hidden sm:block">
+                                    <span class="animate-pulse flex h-2 w-2 rounded-full bg-green-500"></span>
                                 </div>
-                                <span class="text-xs text-gray-400">5h ago</span>
                             </div>
+                            </div>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-black text-gray-900 tracking-tight">Recent Work</h3>
+                            <button class="text-green-600 text-xs font-bold hover:underline">Grade All</button>
                         </div>
+                        <div class="divide-y divide-gray-50">
+                            <div class="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
+                                <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-black text-xs shadow-lg shadow-indigo-100 flex-shrink-0">AI</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-gray-900 text-sm truncate">Ahmad Ibrahim</p>
+                                    <p class="text-xs text-gray-400 truncate">Surah Al-Baqarah Memo...</p>
+                                </div>
+                                <span class="text-[10px] font-bold text-gray-300">2h ago</span>
+                            </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -207,6 +170,24 @@
     <script>
         const { createClient } = supabase;
         const supabaseClient = createClient('https://chhkghparlgsikxzxasw.supabase.co', 'sb_publishable_z0Fv9IFDXOCCdCCUqF6j0w_J0bWFIET');
+
+        // Responsive Navigation Logic
+        const menuBtn = document.getElementById('menuBtn');
+        const closeSidebar = document.getElementById('closeSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('active');
+            overlay.classList.toggle('opacity-0');
+            // Prevent body scroll when menu is open
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        closeSidebar.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
 
         async function checkAuth() {
             const { data: { session } } = await supabaseClient.auth.getSession();

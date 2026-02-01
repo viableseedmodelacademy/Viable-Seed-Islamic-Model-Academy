@@ -1,3 +1,36 @@
+document.body.classList.add('loading');
+
+function revealSite() {
+    const loader = document.getElementById('preloader');
+    const body = document.body;
+    
+    if (loader) {
+        loader.classList.add('fade-out');
+        body.classList.remove('loading');
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 600);
+    } else {
+        body.classList.remove('loading');
+    }
+}
+
+window.addEventListener('load', () => {
+    setTimeout(revealSite, 800);
+});
+
+setTimeout(revealSite, 3000);
+
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    if (menu) menu.classList.toggle('open');
+}
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof initScrollAnimations === "function") initScrollAnimations();
+});
+
+
+
 let currentSlide = 0;
 
 function showPage(pageName) {
@@ -6,12 +39,14 @@ function showPage(pageName) {
     });
     const targetPage = document.getElementById('page-' + pageName);
     if (targetPage) targetPage.classList.add('active');
+    
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.dataset.page === pageName) {
             link.classList.add('active');
         }
     });
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(initScrollAnimations, 100);
 }
@@ -19,14 +54,12 @@ function showPage(pageName) {
 function toggleMobileMenu() {
     const menu = document.getElementById('mobileMenu');
     const icon = document.getElementById('menuIcon');
-    if (!menu || !icon) return;
-    menu.classList.toggle('open');
-    if (menu.classList.contains('open')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-    } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
+    if (menu) {
+        menu.classList.toggle('open');
+        if (icon) {
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
     }
 }
 
@@ -34,29 +67,19 @@ function showSlide(index) {
     const slides = document.querySelectorAll('.carousel-slide');
     const indicators = document.querySelectorAll('.carousel-indicator');
     
-    if (slides.length === 0) return;
-
-    if (index >= slides.length) {
-        currentSlide = 0;
-    } else if (index < 0) {
-        currentSlide = slides.length - 1;
-    } else {
-        currentSlide = index;
-    }
-
-    slides.forEach((slide, i) => {
-        slide.classList.remove('active');
-        if (indicators[i]) {
-            indicators[i].classList.remove('active', 'bg-white');
-            indicators[i].classList.add('bg-white/50');
-        }
+    if (index >= slides.length) index = 0;
+    if (index < 0) index = slides.length - 1;
+    
+    slides.forEach(slide => slide.classList.remove('active'));
+    indicators.forEach(ind => {
+        ind.classList.remove('active', 'bg-white');
+        ind.classList.add('bg-white/50');
     });
-
-    slides[currentSlide].classList.add('active');
-    if (indicators[currentSlide]) {
-        indicators[currentSlide].classList.add('active', 'bg-white');
-        indicators[currentSlide].classList.remove('bg-white/50');
-    }
+    
+    slides[index].classList.add('active');
+    indicators[index].classList.add('active', 'bg-white');
+    indicators[index].classList.remove('bg-white/50');
+    currentSlide = index;
 }
 
 window.nextSlide = function() {
@@ -68,40 +91,48 @@ window.prevSlide = function() {
 };
 
 function initScrollAnimations() {
-    const elements = document.querySelectorAll('.scroll-animate');
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
-    }, { threshold: 0.1 });
-    elements.forEach(el => observer.observe(el));
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
 }
 
 function animateCounters() {
     const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const counter = entry.target;
-                const target = parseInt(counter.dataset.target);
-                let current = 0;
-                const increment = target / 100;
-                const update = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.innerText = Math.ceil(current);
-                        setTimeout(update, 20);
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 1);
                     } else {
                         counter.innerText = target;
                     }
                 };
-                update();
+                updateCount();
                 observer.unobserve(counter);
             }
         });
     }, { threshold: 1.0 });
+    
     counters.forEach(counter => observer.observe(counter));
 }
 
@@ -112,6 +143,7 @@ window.scrollToTop = function() {
 function handleScroll() {
     const backToTop = document.getElementById('backToTop');
     if (!backToTop) return;
+    
     if (window.scrollY > 300) {
         backToTop.classList.remove('opacity-0', 'invisible');
         backToTop.classList.add('opacity-100', 'visible');
@@ -124,23 +156,22 @@ function handleScroll() {
 document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.carousel-slide');
     const indicators = document.querySelectorAll('.carousel-indicator');
-
+    
     if (slides.length > 0) {
         showSlide(0);
-
         setInterval(() => {
             window.nextSlide();
         }, 5000);
-
+        
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => showSlide(index));
         });
     }
-
+    
     initScrollAnimations();
     animateCounters();
     window.addEventListener('scroll', handleScroll);
-
+    
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
