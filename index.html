@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/favicon.png">
 </head>
@@ -64,7 +65,8 @@
                     <a href="/about" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="about">About Us</a>
                     <a href="/courses" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="courses">Courses</a>
                     <a href="/facilities" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="facilities">Facilities</a>
-                    <a href="/gallery" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="contact">Gallery</a>
+                    <a href="/gallery" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="gallery">Gallery</a>
+
                     <a href="/contact" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="contact">Contact</a>
                     <button onclick="window.location.href='/contact'" class="btn-primary text-white px-6 py-3 rounded-full font-semibold">
                         Enroll Now
@@ -105,8 +107,10 @@
 
     <section class="page active" id="page-home">
         <div class="hero-pattern min-h-screen pt-20 relative overflow-hidden">
-            <div class="blob absolute top-20 right-10 w-72 h-72 bg-red-400 opacity-20"></div>
-            <div class="blob absolute bottom-20 left-10 w-96 h-96 bg-red-400 opacity-20" style="animation-delay: -4s;"></div>
+            <div id="particles-js" class="absolute inset-0"></div>
+            <div class="blob absolute top-20 right-10 w-72 h-72 bg-red-400 opacity-20 animate-pulse"></div>
+            <div class="blob absolute bottom-20 left-10 w-96 h-96 bg-red-400 opacity-20 animate-pulse" style="animation-delay: -4s;"></div>
+            <div class="blob absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-400 opacity-10 animate-bounce"></div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
@@ -372,7 +376,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <p class="text-gray-600 mb-6 italic">
-                            "We appreciate the school's focus on the essentials. In our recent feedback session, it was clear that the activities benefiting our children the most are classroom teaching (42.9%) and homework/assignments (42.9%). This shows the school is hitting the mark on core academics. I especially love that my daughter in Grade 2 is already learning the basics of coding alongside her Taekwondo drills. It is a truly holistic Western-Islamic education."
+                            "Excellent core academics through teaching and homework. Holistic coding and Taekwondo. Truly balanced education.
                         <div class="flex items-center gap-4">
                             <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">
                             <div>
@@ -390,9 +394,7 @@
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <p class="text-gray-600 mb-6 italic">
-                           "As a parent, I am thoroughly impressed with the balance here. We recently participated in a school survey where 85.7% of us rated the academic activities as 'Very Effective' for our children, while the remaining 14.3% found them 'Effective.' My son has shown remarkable growth not just in his Quranic recitation, but in his IT and coding classes. Seeing him balance his Deen with such high-level Western technical skills is exactly what we wanted for him in Grade 4"
-                        </p>
+                        <p class="text-gray-600 mb-6 italic">"Impressive balance with 100% effective academic ratings. My son excels in Quran and coding. Perfect Deen and tech blend."</p>
                         <div class="flex items-center gap-4">
                             <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">
                             <div>
@@ -410,7 +412,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <p class="text-gray-600 mb-6 italic">
-                            "Transitioning to the final years of primary school can be tough, but this school makes it seamless. The integration of Western education with robust IT and coding prepares them for the future, while Taekwondo keeps them disciplined and physically fit. The academic results speak for themselves; with nearly 86% of parents agreeing that the school's methods are 'Very Effective,' I feel confident that my child is getting the best of both worlds before heading into secondary school."
+                            "Seamless primary transition via IT, coding, and disciplined Taekwondo. 86% of parents rate academics as "Very Effective." Expertly prepared for secondary school.''
                         </p>
                         <div class="flex items-center gap-4">
                             <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">

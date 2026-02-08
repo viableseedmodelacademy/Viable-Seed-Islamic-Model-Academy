@@ -171,9 +171,10 @@
         </main>
     </div>
 
+    <script src="config.js"></script>
     <script>
         const { createClient } = supabase;
-        const supabaseClient = createClient('https://chhkghparlgsikxzxasw.supabase.co', 'sb_publishable_z0Fv9IFDXOCCdCCUqF6j0w_J0bWFIET');
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
 
         async function checkAuth() {
             const { data: { session } } = await supabaseClient.auth.getSession();

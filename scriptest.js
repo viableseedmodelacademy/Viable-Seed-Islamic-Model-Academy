@@ -87,9 +87,4 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     });
 });
 
-(async () => {
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    if (session?.user) {
-        redirectByRole(session.user.email);
-    }
-})();
+
