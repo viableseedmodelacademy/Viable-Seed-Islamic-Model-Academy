@@ -238,34 +238,63 @@
                 </p>
             </div>
             
-            <div class="grid md:grid-cols-4 gap-8">
-                <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate">
-                    <img src="staff image.png" alt="Teacher" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
-                    <h3 class="text-xl font-bold text-gray-800">Mr. Adedeji</h3>
-                    <p class="text-red-600">Founder</p>
-                    <p class="text-gray-500 text-sm mt-2">20+ years experience in educational leadership</p>
+            <div class="relative">
+                <div class="flex space-x-6 overflow-x-auto scrollbar-hide pb-4" id="teachersGallery">
+                    <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
+                        <div class="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-user-tie text-red-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Mr. Adedeji</h3>
+                        <p class="text-red-600">Founder</p>
+                        <p class="text-gray-500 text-sm mt-2">20+ years experience in educational leadership</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
+                        <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-graduation-cap text-blue-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Mrs. Adedeji</h3>
+                        <p class="text-red-600">Head of Academics</p>
+                        <p class="text-gray-500 text-sm mt-2">Specialization in curriculum development</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
+                        <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-book-open text-green-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Mrs. Sulaiman</h3>
+                        <p class="text-red-600">Education Expert</p>
+                        <p class="text-gray-500 text-sm mt-2">Dedicated to fostering academic excellence</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
+                        <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-palette text-purple-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Mrs. Waheed</h3>
+                        <p class="text-red-600">Creative Arts and Crafts Expert</p>
+                        <p class="text-gray-500 text-sm mt-2">Inspiring creativity through art and crafts</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
+                        <div class="w-20 h-20 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chalkboard-teacher text-yellow-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Mrs. Alaka</h3>
+                        <p class="text-red-600">Education Expert</p>
+                        <p class="text-gray-500 text-sm mt-2">Committed to innovative teaching methods</p>
+                    </div>
                 </div>
-                
-                <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate">
-                    <img src="staff image.png" alt="Teacher" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
-                    <h3 class="text-xl font-bold text-gray-800">Mrs. Adedeji II</h3>
-                    <p class="text-red-600">Head of Academics</p>
-                    <p class="text-gray-500 text-sm mt-2">Specialization in curriculum development</p>
-                </div>
-                
-                <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate">
-                    <img src="staff image.png" alt="Teacher" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
-                    <h3 class="text-xl font-bold text-gray-800">Ustadh Muadh</h3>
-                    <p class="text-red-600">Islamic Studies Coordinator</p>
-                    <p class="text-gray-500 text-sm mt-2">Hafiz with advanced Islamic studies certification</p>
-                </div>
-                
-                <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate">
-                    <img src="staff image.png" alt="Teacher" class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
-                    <h3 class="text-xl font-bold text-gray-800">Mallam Bako</h3>
-                    <p class="text-red-600">STEM Lead Teacher</p>
-                    <p class="text-gray-500 text-sm mt-2">Expert in robotics, coding, and digital literacy</p>
-                </div>
+                <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50" id="scrollLeftTeachers">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50" id="scrollRightTeachers">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
@@ -362,5 +391,40 @@
     <i class="fas fa-arrow-up"></i>
 </button>
         <script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const teachersGallery = document.getElementById('teachersGallery');
+    const scrollLeftTeachers = document.getElementById('scrollLeftTeachers');
+    const scrollRightTeachers = document.getElementById('scrollRightTeachers');
+    let autoScrollIntervalTeachers;
+
+    function startAutoScrollTeachers() {
+        autoScrollIntervalTeachers = setInterval(() => {
+            if (teachersGallery.scrollLeft + teachersGallery.clientWidth >= teachersGallery.scrollWidth) {
+                teachersGallery.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                teachersGallery.scrollBy({ left: 320, behavior: 'smooth' });
+            }
+        }, 3000);
+    }
+
+    function stopAutoScrollTeachers() {
+        clearInterval(autoScrollIntervalTeachers);
+    }
+
+    scrollLeftTeachers.addEventListener('click', function() {
+        teachersGallery.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+
+    scrollRightTeachers.addEventListener('click', function() {
+        teachersGallery.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+
+    teachersGallery.addEventListener('mouseenter', stopAutoScrollTeachers);
+    teachersGallery.addEventListener('mouseleave', startAutoScrollTeachers);
+
+    startAutoScrollTeachers();
+});
+</script>
 </body>
 </html>
