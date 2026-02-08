@@ -111,33 +111,46 @@
             </p>
         </div>
     </div>
-    <div class="profile-scroll-container">
-    <div class="profile-card">
-        <div class="profile-pic">🖼️</div>
-        <div class="profile-name">Picture 1</div>
-    </div>
-    <div class="profile-card">
-        <div class="profile-pic">🖼️</div>
-        <div class="profile-name">Picture 2</div>
-    </div>
-    <div class="profile-card">
-        <div class="profile-pic">🖼️</div>
-        <div class="profile-name">Picture 3</div>
-    </div>
-    <div class="profile-card">
-        <div class="profile-pic">🖼️</div>
-        <div class="profile-name">Picture 4</div>
-    </div>
-    <div class="profile-card">
-        <div class="profile-pic">🖼️</div>
-        <div class="profile-name">Picture 5</div>
-    </div>
-    <div class="profile-card">
-        <div class="profile-pic">🖼️</div>
-        <div class="profile-name">Picture 6</div>
-    </div>
-</div>
-<span><p class="coming">Updates are coming soon.................</p></span>
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Recent Images</h2>
+            <div class="relative">
+                <div class="flex space-x-4 overflow-x-auto scrollbar-hide pb-4" id="imageGallery">
+                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="images/act.jpg" alt="Activity" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="images/cyctecb.jpg" alt="Technology" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="images/go.jpg" alt="Group" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="images/rand.jpg" alt="Random" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="images/tech.jpg" alt="Tech" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="images/techp.jpg" alt="Tech Project" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
+                        <img src="images/walp.jpg" alt="Wall" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50" id="scrollLeft">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50" id="scrollRight">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
 </section>
     <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -228,6 +241,41 @@
 <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-red-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all hover:bg-red-700 z-50" onclick="scrollToTop()">
     <i class="fas fa-arrow-up"></i>
 </button>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const gallery = document.getElementById('imageGallery');
+    const scrollLeft = document.getElementById('scrollLeft');
+    const scrollRight = document.getElementById('scrollRight');
+    let autoScrollInterval;
+
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth) {
+                gallery.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                gallery.scrollBy({ left: 320, behavior: 'smooth' });
+            }
+        }, 3000);
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+
+    scrollLeft.addEventListener('click', function() {
+        gallery.scrollBy({ left: -320, behavior: 'smooth' });
+    });
+
+    scrollRight.addEventListener('click', function() {
+        gallery.scrollBy({ left: 320, behavior: 'smooth' });
+    });
+
+    gallery.addEventListener('mouseenter', stopAutoScroll);
+    gallery.addEventListener('mouseleave', startAutoScroll);
+
+    startAutoScroll();
+});
+</script>
 <script src="script.js"></script>
 </body>
 </html>
