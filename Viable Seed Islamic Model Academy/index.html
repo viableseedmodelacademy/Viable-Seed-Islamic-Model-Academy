@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viable Seed Model Academy</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+
+<body class="bg-gray-50 text-gray-800 loading">
+    <div id="preloader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white">
+        <div class="relative w-32 h-32 flex items-center justify-center">
+            <div class="absolute inset-0 border-4 border-gray-100 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-transparent border-t-red-600 rounded-full animate-spin"></div>
+            
+            <svg class="w-16 h-16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 80 Q50 90 70 80" stroke="#4B2C20" stroke-width="4" stroke-linecap="round"/>
+                <path id="stem" d="M50 80 Q50 80 50 80" stroke="#10b981" stroke-width="3" fill="none">
+                    <animate attributeName="d" 
+                             values="M50 80 Q50 80 50 80; M50 80 Q40 60 50 40; M50 80 Q60 50 50 30" 
+                             dur="2s" fill="freeze" /> </path>
+                <path class="leaf" d="M50 50 Q30 40 40 30 Q50 40 50 50" fill="#10b981" opacity="0">
+                    <animate attributeName="opacity" values="0;0;1" dur="2s" fill="freeze" />
+                </path>
+                <path class="leaf" d="M50 50 Q70 40 60 30 Q50 40 50 50" fill="#10b981" opacity="0">
+                    <animate attributeName="opacity" values="0;0;1" dur="2s" fill="freeze" />
+                </path>
+            </svg>
+        </div>
+        
+        <div class="text-center mt-6">
+            <p class="font-bold text-red-600 tracking-widest text-lg mb-1">VIABLE SEED</p>
+            <p class="text-xs text-gray-500 font-medium uppercase tracking-[0.3em]">Nurturing Excellence</p>
+        </div>
+
+        <div class="mt-8 flex gap-2">
+            <div class="w-3 h-3 bg-red-600 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+            <div class="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            <div class="w-3 h-3 bg-green-500 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+        </div>
+    </div>
+
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-500 rounded-xl flex items-center justify-center">
+                        <img src="logo.png" alt="Our logo">
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-red-900">Viable Seed Model Academy</h1>
+                    </div>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="nav-link text-gray-700 hover:text-red-600 font-semibold active" data-page="home">Home</a>
+                    <a href="/about" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="about">About Us</a>
+                    <a href="/courses" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="courses">Courses</a>
+                    <a href="/facilities" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="facilities">Facilities</a>
+                    <a href="/gallery" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="gallery">Gallery</a>
+
+                    <a href="/contact" class="nav-link text-gray-700 hover:text-red-600 font-semibold" data-page="contact">Contact</a>
+                    <button onclick="window.location.href='/contact'" class="btn-primary text-white px-6 py-3 rounded-full font-semibold">
+                        Enroll Now
+                    </button>
+                    <button onclick="window.location.href='/login'" class="btn-primary text-white px-6 py-3 rounded-full font-semibold">
+                        Login
+                    </button>
+                </div>
+                
+                <button class="md:hidden text-gray-700 text-2xl" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="mobile-menu fixed top-0 left-0 w-64 h-full bg-white shadow-2xl md:hidden" id="mobileMenu">
+            <div class="p-6">
+                <button class="absolute top-4 right-4 text-gray-500 text-xl" onclick="toggleMobileMenu()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="mt-8 space-y-4">
+                    <a href="/" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Home</a>
+                    <a href="/about" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">About Us</a>
+                    <a href="/courses" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Courses</a>
+                    <a href="/facilities" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Facilities</a>
+                    <a href="/gallery" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Gallery</a>
+                    <a href="/contact" onclick="toggleMobileMenu();" class="block py-3 text-gray-700 hover:text-red-600 font-semibold border-b border-gray-100">Contact</a>
+                    <button onclick="window.location.href='/contact'; toggleMobileMenu();" class="btn-primary text-white px-6 py-3 rounded-full font-semibold w-full mt-4">
+                        Enroll Now
+                    </button>
+                    <button onclick="window.location.href='/login'; toggleMobileMenu();" class="btn-primary text-white px-6 py-3 rounded-full font-semibold w-full mt-4">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page active" id="page-home">
+        <div class="hero-pattern min-h-screen pt-20 relative overflow-hidden">
+            <div id="particles-js" class="absolute inset-0"></div>
+            <div class="blob absolute top-20 right-10 w-72 h-72 bg-red-400 opacity-20 animate-pulse"></div>
+            <div class="blob absolute bottom-20 left-10 w-96 h-96 bg-red-400 opacity-20 animate-pulse" style="animation-delay: -4s;"></div>
+            <div class="blob absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-400 opacity-10 animate-bounce"></div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+                    <div class="text-white space-y-8 animate-slide-left">
+                        <div class="inline-block bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold animate-pulse">
+                            🎓 Admission in Progress!
+                        </div>
+                        <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                            Welcome to<br>
+                            <span class="text-blue-400">Viable Seed Islamic Model Academy</span>
+                        </h1>
+                        <p class="text-xl text-red-100 leading-relaxed">
+                            We provide quality education with Islamic values in a safe, caring, and modern learning environment.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="window.location.href='/login'" class="btn-secondaryp text-green-900 px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2">
+                                <i class="fas fa-sign-in-alt"></i> Login
+                            </button>
+                            <button onclick="window.location.href='/contact'" class="btn-secondary text-red-900 px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2">
+                                <i class="fas fa-user-plus"></i> Enroll Now
+                            </button>
+                            <button onclick="window.location.href='/contact'" class="btn-secondaryt text-red-900 px-8 py-4 rounded-full font-bold text-lg flex items-center gap-2">
+                                <i class="fas fa-phone"></i> Contact Us
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-6 pt-8">
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-blue-400 counter" data-target="50">0</div>
+                                <div class="text-red-200 text-sm">Happy Students</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-blue-400 counter" data-target="20">0</div>
+                                <div class="text-red-200 text-sm">Expert Teachers</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-4xl font-bold text-blue-400 counter" data-target="15">0</div>
+                                <div class="text-red-200 text-sm">Years Experience</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative animate-slide-right">
+                        <div class="relative z-10">
+                            <img src="logoclass.png" alt="Students Learning" class="rounded-3xl shadow-2xl w-full">
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 w-48 h-48 bg-red-400 rounded-3xl -z-0"></div>
+                        <div class="absolute -top-6 -right-6 w-32 h-32 bg-red-400 rounded-2xl -z-0 animate-float"></div>
+                        
+                        <div class="absolute bottom-8 left-8 bg-white rounded-2xl p-4 shadow-xl animate-float">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-shield-alt text-green-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800">Safe Environment</div>
+                                    <div class="text-sm text-gray-500">Child Safety First</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12 scroll-animate">
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">Life at Viable Seed Academy</h2>
+                    <p class="text-gray-600 text-lg">A glimpse into our vibrant learning community</p>
+                </div>
+                
+                <div class="carousel-container rounded-3xl overflow-hidden shadow-2xl scroll-animate">
+                    <div class="carousel-slide active">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=500&fit=crop" alt="Classroom Learning" class="w-full h-[400px] md:h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                            <div class="p-8 text-white">
+                                <h3 class="text-2xl font-bold">Modern Classrooms</h3>
+                                <p>Equipped with latest learning technologies</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="sports.png" alt="Sports Activities" class="w-full h-[400px] md:h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                            <div class="p-8 text-white">
+                                <h3 class="text-2xl font-bold">Sports & Physical Education</h3>
+                                <p>Building healthy bodies and minds</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=1200&h=500&fit=crop" alt="Library" class="w-full h-[400px] md:h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                            <div class="p-8 text-white">
+                                <h3 class="text-2xl font-bold">Well-Stocked Library</h3>
+                                <p>Encouraging reading and research skills</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute bottom-8 right-8 flex gap-3">
+                        <button onclick="prevSlide()" class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg">
+                            <i class="fas fa-chevron-left text-gray-800"></i>
+                        </button>
+                        <button onclick="nextSlide()" class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg">
+                            <i class="fas fa-chevron-right text-gray-800"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="absolute bottom-8 left-8 flex gap-2">
+                        <button class="carousel-indicator w-3 h-3 rounded-full bg-white transition-all active" data-slide="0"></button>
+                        <button class="carousel-indicator w-3 h-3 rounded-full bg-white/50 transition-all" data-slide="1"></button>
+                        <button class="carousel-indicator w-3 h-3 rounded-full bg-white/50 transition-all" data-slide="2"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="py-20 bg-gradient-to-br from-red-50 to-red-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="scroll-animate">
+                        <div class="img-hover rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="classroom.png" alt="School Building" class="w-full">
+                        </div>
+                    </div>
+                    <div class="scroll-animate">
+                        <div class="inline-block bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                            About Our School
+                        </div>
+                        <h2 class="text-4xl font-bold text-gray-800 mb-6">Welcome to Viable Seed Islamic Model Academy</h2>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                            At Viable Seed Model Academy, we believe in nurturing young minds with a perfect blend of academic excellence and moral values. Our commitment to providing quality Western education combined with Islamic teachings prepares students for success in this world and the hereafter.
+                        </p>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+                            With a team of dedicated educators and state-of-the-art facilities, we create an environment where every child can thrive, explore their potential, and develop into confident, responsible individuals.
+                        </p>
+                        <button onclick="window.location.href='/about'"  class="btn-primary text-white px-8 py-4 rounded-full font-semibold flex items-center gap-2">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 scroll-animate">
+                    <div class="inline-block bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        Why Choose Us
+                    </div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What Makes Us Different</h2>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                        We provide a unique educational experience that combines academic rigor with moral excellence
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="card-hover bg-gradient-to-br from-red-500 to-red-700 rounded-3xl p-8 text-white text-center scroll-animate">
+                        <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-book-open text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Quality Western Education</h3>
+                        <p class="text-red-100">Internationally recognized curriculum with modern teaching methodologies</p>
+                    </div>
+                    
+                    <div class="card-hover bg-gradient-to-br from-red-500 to-red-600 rounded-3xl p-8 text-white text-center scroll-animate">
+                        <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-mosque text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Islamic & Moral Excellence</h3>
+                        <p class="text-red-100">Strong foundation in Islamic values and ethical character building</p>
+                    </div>
+                    
+                    <div class="card-hover bg-gradient-to-br from-green-500 to-green-600 rounded-3xl p-8 text-white text-center scroll-animate">
+                        <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-laptop-code text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Digital Skills for Future</h3>
+                        <p class="text-green-100">Preparing students with coding, robotics, and technology skills</p>
+                    </div>
+                    
+                    <div class="card-hover bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl p-8 text-white text-center scroll-animate">
+                        <div class="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-heart text-4xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Safe & Caring Environment</h3>
+                        <p class="text-purple-100">A nurturing atmosphere where every child feels valued and secure</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="py-20 bg-gray-900 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 40L40 0H20L0 20M40 40V20L20 40\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+            </div>
+            
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="scroll-animate">
+                        <div class="inline-block bg-red-500/20 text-red-400 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                            Technology Integration
+                        </div>
+                        <h2 class="text-4xl font-bold text-white mb-6">Getting Students Ready for the Digital World</h2>
+                        <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                            In today's rapidly evolving technological landscape, we ensure our students are not just consumers of technology but creators. Our comprehensive digital literacy program equips them with skills for the future.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <span class="text-white">Coding & Programming Skills</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <span class="text-white">Robotics & AI Fundamentals</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <span class="text-white">Digital Creativity & Design</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-check text-white"></i>
+                                </div>
+                                <span class="text-white">Safe & Responsible Internet Use</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-animate">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&h=500&fit=crop" alt="Digital Learning" class="rounded-3xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="py-20 bg-gradient-to-br from-red-50 to-red-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 scroll-animate">
+                    <div class="inline-block bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        Testimonials
+                    </div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-4">What Parents Say</h2>
+                    <p class="text-gray-600 text-lg">Hear from our satisfied parents and guardians</p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="testimonial-card card-hover rounded-3xl p-8 shadow-lg scroll-animate">
+                        <div class="flex items-center gap-1 text-red-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6 italic">
+                            "Excellent core academics through teaching and homework. Holistic coding and Taekwondo. Truly balanced education.
+                        <div class="flex items-center gap-4">
+                            <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">
+                            <div>
+                                <div class="font-bold text-gray-800">Mr. Olumide</div>
+                                <div class="text-sm text-gray-500">Parent of Grade 2 student</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card card-hover rounded-3xl p-8 shadow-lg scroll-animate">
+                        <div class="flex items-center gap-1 text-red-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6 italic">"Impressive balance with 100% effective academic ratings. My son excels in Quran and coding. Perfect Deen and tech blend."</p>
+                        <div class="flex items-center gap-4">
+                            <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">
+                            <div>
+                                <div class="font-bold text-gray-800">Mr. Adeyemi</div>
+                                <div class="text-sm text-gray-500">Parent of Grade 4 Student</div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <div class="testimonial-card card-hover rounded-3xl p-8 shadow-lg scroll-animate">
+                        <div class="flex items-center gap-1 text-red-400 mb-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6 italic">
+                            "Seamless primary transition via IT, coding, and disciplined Taekwondo. 86% of parents rate academics as "Very Effective." Expertly prepared for secondary school.''
+                        </p>
+                        <div class="flex items-center gap-4">
+                            <img src="staff image.png" alt="Parent" class="w-14 h-14 rounded-full object-cover">
+                            <div>
+                                <div class="font-bold text-gray-800">Mr. Olawale</div>
+                                <div class="text-sm text-gray-500">Parent of Grade 5 Student</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <a href="/" class="flex items-center space-x-3">
+                        <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-500 rounded-xl flex items-center justify-center">
+                            <img src="logo.png" alt="Our logo">
+                        </div></a>
+                        <div>
+                            <h3 class="text-xl font-bold">Viable Seed Islamic Model Acaademy</h3>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Nurturing minds, building character, shaping futures.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="https://www.facebook.com/profile.php?id=61580915043420" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-red-600 transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-pink-600 transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-sky-500 transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-red-600 transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Home</a></li>
+                        <li><a href="/about" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> About Us</a></li>
+                        <li><a href="/courses" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Courses</a></li>
+                        <li><a href="/facilities" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Facilities</a></li>
+                        <li><a href="/gallery" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Gallery</a></li>
+                        <li><a href="/contact" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Our Programs</h4>
+                    <ul class="space-y-3">
+                        <li><a href="/courses" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Western Education</a></li>
+                        <li><a href="/courses" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Islamic Studies</a></li>
+                        <li><a href="/courses" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Qur'an Memorization</a></li>
+                        <li><a href="/courses"  class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Coding & Robotics</a></li>
+                        <li><a href="/courses" class="text-gray-400 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Taekwondo</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt text-red-500 mt-1"></i>
+                            <span class="text-gray-400">Idi-Obi Junction, Adjacent Ojo Block Industry, Off Eleyele-Ido Road, Ibadan.</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-red-500"></i>
+                            <span class="text-gray-400">08034203098, 08127693669</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fab fa-whatsapp text-red-500"></i>
+                            <span class="text-gray-400">+2348034203098</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-red-500"></i>
+                            <span class="text-gray-400">vsimafrontdesk@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500">
+                    © 2021-2026 Viableseedacademy. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-red-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all hover:bg-red-700 z-50" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script src="script.js"></script>
+</body>
+</html>
