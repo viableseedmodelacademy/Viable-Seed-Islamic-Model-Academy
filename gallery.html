@@ -114,39 +114,14 @@
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Recent Images</h2>
-            <div class="relative">
-                <div class="flex space-x-4 overflow-x-auto scrollbar-hide pb-4" id="imageGallery">
-                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="images/act.jpg" alt="Activity" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="images/cyctecb.jpg" alt="Technology" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="images/go.jpg" alt="Group" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="images/rand.jpg" alt="Random" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="images/tech.jpg" alt="Tech" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="images/techp.jpg" alt="Tech Project" class="w-full h-full object-cover">
-                    </div>
-                    <div class="flex-shrink-0 w-80 h-60 bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src="images/walp.jpg" alt="Wall" class="w-full h-full object-cover">
-                    </div>
-                </div>
-                <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50" id="scrollLeft">
-                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                </button>
-                <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow-lg rounded-full p-2 hover:bg-gray-50" id="scrollRight">
-                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
+            
+            <div class="gallery-grid" id="galleryGrid">
+            </div>
+            
+            <div class="text-center mt-12">
+                <button id="loadMoreBtn" class="load-more-btn">
+                    <span>Load More</span>
+                    <i class="fas fa-arrow-down ml-2"></i>
                 </button>
             </div>
         </div>
@@ -238,42 +213,108 @@
         </div>
     </footer>
 
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox">
+    <button class="lightbox-close" onclick="closeLightbox()">
+        <i class="fas fa-times"></i>
+    </button>
+    <div class="lightbox-content">
+        <img id="lightbox-image" src="" alt="Preview">
+    </div>
+    <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
+</div>
+
 <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-red-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all hover:bg-red-700 z-50" onclick="scrollToTop()">
     <i class="fas fa-arrow-up"></i>
 </button>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const gallery = document.getElementById('imageGallery');
-    const scrollLeft = document.getElementById('scrollLeft');
-    const scrollRight = document.getElementById('scrollRight');
-    let autoScrollInterval;
-
-    function startAutoScroll() {
-        autoScrollInterval = setInterval(() => {
-            if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth) {
-                gallery.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                gallery.scrollBy({ left: 320, behavior: 'smooth' });
-            }
-        }, 3000);
+    const galleryImages = [
+        { src: 'images/act.jpg', alt: '' },
+        { src: 'images/cyctecb.jpg', alt: '' },
+        { src: 'images/go.jpg', alt: '' },
+        { src: 'images/rand.jpg', alt: '' },
+        { src: 'images/tech.jpg', alt: '' },
+        { src: 'images/techp.jpg', alt: '' },
+        { src: 'images/walp.jpg', alt: '' }
+    ];
+    
+    const initialLoad = 5;
+    const loadMoreCount = 2;
+    let currentIndex = 0;
+    
+    const galleryGrid = document.getElementById('galleryGrid');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    
+    function createImageCard(image, index) {
+        const card = document.createElement('div');
+        card.className = 'gallery-item';
+        card.innerHTML = `
+            <div class="gallery-image-wrapper" onclick="openLightbox('${image.src}')" style="cursor: pointer;">
+                <img src="${image.src}" alt="${image.alt}" class="gallery-image" loading="lazy">
+                <div class="gallery-overlay" onclick="event.stopPropagation(); openLightbox('${image.src}')">
+                    <div class="gallery-overlay-content">
+                        <i class="fas fa-expand"></i>
+                        <span>${image.alt}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        card.style.animationDelay = `${index * 0.1}s`;
+        return card;
     }
-
-    function stopAutoScroll() {
-        clearInterval(autoScrollInterval);
+    
+    function loadImages(count) {
+        let loaded = 0;
+        const fragment = document.createDocumentFragment();
+        
+        while (currentIndex < galleryImages.length && loaded < count) {
+            const card = createImageCard(galleryImages[currentIndex], currentIndex);
+            fragment.appendChild(card);
+            currentIndex++;
+            loaded++;
+        }
+        
+        galleryGrid.appendChild(fragment);
+        
+        if (currentIndex >= galleryImages.length) {
+            loadMoreBtn.classList.add('hidden');
+        }
     }
-
-    scrollLeft.addEventListener('click', function() {
-        gallery.scrollBy({ left: -320, behavior: 'smooth' });
+    
+    loadImages(initialLoad);
+    
+    loadMoreBtn.addEventListener('click', function() {
+        loadImages(loadMoreCount);
     });
+});
 
-    scrollRight.addEventListener('click', function() {
-        gallery.scrollBy({ left: 320, behavior: 'smooth' });
-    });
+// Lightbox functions
+function openLightbox(imageSrc) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    
+    if (lightbox && lightboxImage) {
+        lightboxImage.src = imageSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
 
-    gallery.addEventListener('mouseenter', stopAutoScroll);
-    gallery.addEventListener('mouseleave', startAutoScroll);
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
 
-    startAutoScroll();
+// Close lightbox on escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
 });
 </script>
 <script src="script.js"></script>

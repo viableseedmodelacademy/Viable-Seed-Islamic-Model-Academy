@@ -241,45 +241,35 @@
             <div class="relative">
                 <div class="flex space-x-6 overflow-x-auto scrollbar-hide pb-4" id="teachersGallery">
                     <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
-                        <div class="w-20 h-20 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-user-tie text-red-600 text-3xl"></i>
-                        </div>
+                        <img src="staff image.png" alt="Mr. Adedeji" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover cursor-pointer transform hover:scale-110 transition-transform duration-300 shadow-lg" onclick="openModal(this)">
                         <h3 class="text-xl font-bold text-gray-800">Mr. Adedeji</h3>
                         <p class="text-red-600">Founder</p>
                         <p class="text-gray-500 text-sm mt-2">20+ years experience in educational leadership</p>
                     </div>
 
                     <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
-                        <div class="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-graduation-cap text-blue-600 text-3xl"></i>
-                        </div>
+                        <img src="staff image.png" alt="Mrs. Adedeji" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover cursor-pointer transform hover:scale-110 transition-transform duration-300 shadow-lg" onclick="openModal(this)">
                         <h3 class="text-xl font-bold text-gray-800">Mrs. Adedeji</h3>
                         <p class="text-red-600">Head of Academics</p>
                         <p class="text-gray-500 text-sm mt-2">Specialization in curriculum development</p>
                     </div>
 
                     <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
-                        <div class="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-book-open text-green-600 text-3xl"></i>
-                        </div>
+                        <img src="staff image.png" alt="Mrs. Sulaiman" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover cursor-pointer transform hover:scale-110 transition-transform duration-300 shadow-lg" onclick="openModal(this)">
                         <h3 class="text-xl font-bold text-gray-800">Mrs. Sulaiman</h3>
                         <p class="text-red-600">Education Expert</p>
                         <p class="text-gray-500 text-sm mt-2">Dedicated to fostering academic excellence</p>
                     </div>
 
                     <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
-                        <div class="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-palette text-purple-600 text-3xl"></i>
-                        </div>
+                        <img src="staff image.png" alt="Mrs. Waheed" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover cursor-pointer transform hover:scale-110 transition-transform duration-300 shadow-lg" onclick="openModal(this)">
                         <h3 class="text-xl font-bold text-gray-800">Mrs. Waheed</h3>
                         <p class="text-red-600">Creative Arts and Crafts Expert</p>
                         <p class="text-gray-500 text-sm mt-2">Inspiring creativity through art and crafts</p>
                     </div>
 
                     <div class="card-hover bg-white rounded-3xl p-6 text-center scroll-animate flex-shrink-0 w-80">
-                        <div class="w-20 h-20 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-chalkboard-teacher text-yellow-600 text-3xl"></i>
-                        </div>
+                        <img src="staff image.png" alt="Mrs. Alaka" class="w-24 h-24 rounded-full mx-auto mb-4 object-cover cursor-pointer transform hover:scale-110 transition-transform duration-300 shadow-lg" onclick="openModal(this)">
                         <h3 class="text-xl font-bold text-gray-800">Mrs. Alaka</h3>
                         <p class="text-red-600">Education Expert</p>
                         <p class="text-gray-500 text-sm mt-2">Committed to innovative teaching methods</p>
@@ -390,20 +380,90 @@
 <button id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-red-600 text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all hover:bg-red-700 z-50" onclick="scrollToTop()">
     <i class="fas fa-arrow-up"></i>
 </button>
-        <script src="script.js"></script>
+
+<div id="imageModal" class="fixed inset-0 z-[9999] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm" onclick="closeModal(event)">
+    <div class="relative max-w-4xl w-full mx-4 transform transition-all scale-95 opacity-0" id="modalContent">
+        <button class="absolute -top-12 right-0 text-white hover:text-red-500 transition-colors text-3xl font-light" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="modalImage" src="" alt="Preview" class="w-full h-auto max-h-[80vh] object-contain rounded-2xl shadow-2xl">
+        <div class="text-center mt-4">
+            <p id="modalCaption" class="text-white text-lg font-semibold"></p>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Improved scrollbar styling */
+#teachersGallery {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+#teachersGallery::-webkit-scrollbar {
+    height: 6px;
+}
+#teachersGallery::-webkit-scrollbar-track {
+    background: transparent;
+}
+#teachersGallery::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}
+#teachersGallery::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.5);
+}
+
+/* Modal animation */
+#imageModal.active #modalContent {
+    transform: scale(1);
+    opacity: 1;
+}
+</style>
+
+<script src="script.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const teachersGallery = document.getElementById('teachersGallery');
     const scrollLeftTeachers = document.getElementById('scrollLeftTeachers');
     const scrollRightTeachers = document.getElementById('scrollRightTeachers');
     let autoScrollIntervalTeachers;
+    let isScrolling = false;
+
+    // Enhanced smooth scrolling with momentum
+    function smoothScroll(distance) {
+        if (isScrolling) return;
+        isScrolling = true;
+        
+        const start = teachersGallery.scrollLeft;
+        const startTime = performance.now();
+        const duration = 500;
+        
+        function animate(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Easing function (ease-out)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentPos = start + (distance * easeOut);
+            
+            teachersGallery.scrollLeft = currentPos;
+            
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                isScrolling = false;
+            }
+        }
+        
+        requestAnimationFrame(animate);
+    }
 
     function startAutoScrollTeachers() {
         autoScrollIntervalTeachers = setInterval(() => {
-            if (teachersGallery.scrollLeft + teachersGallery.clientWidth >= teachersGallery.scrollWidth) {
-                teachersGallery.scrollTo({ left: 0, behavior: 'smooth' });
+            if (teachersGallery.scrollLeft + teachersGallery.clientWidth >= teachersGallery.scrollWidth - 10) {
+                smoothScroll(-teachersGallery.scrollLeft);
             } else {
-                teachersGallery.scrollBy({ left: 320, behavior: 'smooth' });
+                smoothScroll(320);
             }
         }, 3000);
     }
@@ -413,17 +473,62 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     scrollLeftTeachers.addEventListener('click', function() {
-        teachersGallery.scrollBy({ left: -320, behavior: 'smooth' });
+        smoothScroll(-320);
+        stopAutoScrollTeachers();
+        setTimeout(startAutoScrollTeachers, 5000);
     });
 
     scrollRightTeachers.addEventListener('click', function() {
-        teachersGallery.scrollBy({ left: 320, behavior: 'smooth' });
+        smoothScroll(320);
+        stopAutoScrollTeachers();
+        setTimeout(startAutoScrollTeachers, 5000);
     });
 
     teachersGallery.addEventListener('mouseenter', stopAutoScrollTeachers);
     teachersGallery.addEventListener('mouseleave', startAutoScrollTeachers);
 
     startAutoScrollTeachers();
+});
+
+// Modal functions
+function openModal(imgElement) {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    const modalContent = document.getElementById('modalContent');
+    
+    modalImg.src = imgElement.src;
+    modalCaption.textContent = imgElement.alt;
+    
+    modal.classList.remove('hidden');
+    // Trigger reflow for animation
+    void modal.offsetWidth;
+    modal.classList.add('active');
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal(event) {
+    if (event && event.target !== event.currentTarget && !event.target.closest('.fa-times')) {
+        return;
+    }
+    
+    const modal = document.getElementById('imageModal');
+    const modalContent = document.getElementById('modalContent');
+    
+    modal.classList.remove('active');
+    setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }, 300);
+}
+
+// Close modal on escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
 });
 </script>
 </body>
